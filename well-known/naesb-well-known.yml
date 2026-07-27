@@ -1,0 +1,47 @@
+generated: '2026-07-27'
+method: searched
+source: live probes of the NAESB website host and the OATI-operated EIR webRegistry host
+summary: >-
+  NAESB publishes no /.well-known/ discovery surface. Every RFC-defined well-known
+  path probed on www.naesb.org returned 404 from the IIS server that fronts the
+  classic ASP site; the host does not even serve /robots.txt or /sitemap.xml. The
+  EIR webRegistry host operated by OATI is behind a private PKI (see the note
+  below) and serves no well-known documents either. Recorded as verified absence,
+  not as an unchecked gap.
+hosts:
+- host: https://www.naesb.org
+  role: organization website and standards distribution
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+  - path: /sitemap.xml
+    status: 404
+- host: https://www.naesbwry.oati.com
+  role: NAESB Electric Industry Registry (EIR) webRegistry, administered by OATI
+  note: >-
+    The server certificate is issued by "webCARES Server Issuing CA 2025" (Open Access
+    Technology International Inc), a private CA that does not chain to a public root,
+    so ordinary TLS verification fails (curl exit 60 / OpenSSL verify result 20). The
+    host is reachable and does answer once that private chain is trusted, but it
+    publishes no /.well-known/ documents.
+  documents:
+  - path: /.well-known/security.txt
+    status: not-served
+  - path: /.well-known/openid-configuration
+    status: not-served
+security_txt: false
+openid_configuration: false
+oauth_authorization_server: false
+api_catalog: false

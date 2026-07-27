@@ -1,0 +1,117 @@
+generated: '2026-07-27'
+method: searched
+source: https://www.naesb.org/weq/weq_eir.asp
+docs: https://www.naesb.org/weq/weq_eir.asp
+summary: >-
+  NAESB maintains no developer changelog page, but the WEQ Electric Industry Registry page
+  carries a continuously updated, reverse-chronological stream of dated announcement
+  documents going back to 2013 — release notices for the EIR webRegistry, Authorized
+  Certification Authority renewal notices, and fee changes. That stream is the provider's
+  real change log for the one API it operates. Entries below are the recent window,
+  transcribed from the announcement documents themselves; NAESB posts them as Word files
+  rather than HTML.
+scheme: dated announcement notices, no semantic version
+format: Microsoft Word documents linked from the EIR page
+current_version:
+  standard: NAESB REQ.21 ESPI 4.0.20231213
+  registry: queryable at runtime via DownloadRegistryVersion (see lifecycle/naesb-lifecycle.yml)
+categories:
+- registry-update
+- certification-authority-renewal
+- fee-change
+entries:
+- date: '2026-07-10'
+  category: registry-update
+  title: NAESB Electric Industry Registry Update Announcement
+  effective: '2026-07-15'
+  breaking: false
+  highlights:
+  - Corrects an issue with the database fields for Entity State and Country information.
+  - No interruption to system operations expected; deployment at 10:00 AM Central Time.
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_071026.doc
+- date: '2026-04-27'
+  category: certification-authority-renewal
+  title: NAESB Authorized Certification Authority Renewal Courtesy Notice - GMO GlobalSign, Inc.
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_042726.doc
+- date: '2026-03-23'
+  category: certification-authority-renewal
+  title: NAESB Authorized Certification Authority Renewal Courtesy Notice - OATI
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_032326.doc
+- date: '2026-03-09'
+  category: registry-update
+  title: NAESB Electric Industry Registry Update Announcement
+  effective: '2026-03-11'
+  breaking: false
+  highlights:
+  - >-
+    Corrects the CSV upload process for importing source points, sink points,
+    points-of-receipt and points-of-delivery.
+  - No interruption expected; deployment at 7:00 PM Central Time.
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_030926.doc
+- date: '2025-11-07'
+  category: registry-update
+  title: NAESB Electric Industry Registry Update Announcement
+  effective: '2025-12-10'
+  breaking: false
+  highlights:
+  - >-
+    Fixes display drop-down menus that were listing inactive data; only active users are now
+    selectable as an entity's designated contacts.
+  - >-
+    Removes the legacy WECC reliability area, deactivated years earlier; OATI confirmed no
+    entity registrations used it and no existing registrations are impacted.
+  - Fixes summary-screen and pop-up display issues and the data-filter column sorting function.
+  - >-
+    Brief interruption to registry access from 7:00 PM Central Time; the registry web service
+    publications remained downloadable during the outage.
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_110725.doc
+- date: '2025-10-29'
+  category: certification-authority-renewal
+  title: NAESB Authorized Certification Authority Renewal Notice - SSL.com
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_102925.doc
+- date: '2025-08-27'
+  category: fee-change
+  title: Reminder - NAESB EIR Registration and Annual Subscription Fee Increase
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_082725.docx
+- date: '2025-06-24'
+  category: fee-change
+  title: NAESB Electric Industry Registry Registration and Annual Subscription Fee Increase Announcement
+  effective: '2025-10-01'
+  breaking: false
+  highlights:
+  - >-
+    First fee increase since 2015. A $75 increase applies to registrations and annual
+    subscriptions from October 1, 2025.
+  - >-
+    Updated annual subscription fee is $275, applicable to all renewals ending on or after
+    October 1, 2025 regardless of payment date.
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_062425.docx
+- date: '2025-03-26'
+  category: registry-update
+  title: NAESB Electric Industry Registry Update Announcement
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_032625.doc
+- date: '2025-03-21'
+  category: certification-authority-renewal
+  title: NAESB Authorized Certification Authority Renewal Courtesy Notice - OATI
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_032125.doc
+- date: '2025-03-20'
+  category: certification-authority-renewal
+  title: NAESB Authorized Certification Authority Renewal Courtesy Notice - GMO GlobalSign Inc.
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_032025.doc
+- date: '2025-02-26'
+  category: registry-update
+  title: NAESB Electric Industry Registry Update Announcement
+  breaking: false
+  source: https://www.naesb.org/pdf4/naesb_eir_update_announcement_022625.doc
+window_note: >-
+  Recent window only. The EIR page lists the full announcement archive back to 2013; the live
+  page is the source of truth. Entries dated 2026-07-10, 2026-03-09, 2025-11-07 and 2025-06-24
+  were read from the announcement documents; the remainder are transcribed from the dated
+  index on the EIR page.

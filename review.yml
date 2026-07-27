@@ -276,13 +276,22 @@ probes:
     status: 200
     note: 'Membership list as of July 23, 2026. WGQ 112 members, WEQ 126, RMQ 32.'
   - url: https://www.naesbwry.oati.com/cgi-bin/webplus.dll?Script=/naesbwry/WREG-Web-Services-Main.wml
-    status: 000
+    status: 200
+    corrected: '2026-07-27'
     note: >-
-      Anonymous request FAILED at the TLS layer, curl exit 60 — "TLSv1.2 (OUT), TLS alert,
-      unknown CA (560) / SSL certificate problem: unable to get local issuer certificate". The
-      server certificate does not chain to a public root store. The documented WSDL GET could
-      therefore not be performed and no WSDL was harvested. Host resolves (174.141.249.134,
-      216.234.87.134); the endpoint exists, it is simply unreachable without the registry PKI.
+      CORRECTED on 2026-07-27. The first pass recorded status 000 and concluded the endpoint
+      was unreachable and no WSDL could be harvested. That conclusion was wrong. What fails is
+      certificate-chain VERIFICATION, not the handshake: the server certificate is issued by
+      "webCARES Server Issuing CA 2025" (Open Access Technology International Inc), a private
+      CA that does not chain to a public root, so curl exits 60 / OpenSSL reports verify
+      result 20. Once that private chain is accounted for, this URL returns HTTP 200 with
+      75,818 bytes of real WSDL 1.1 — one service (WREG_WebServices), one portType
+      (WREG_WebServicesSoap), 30 document/literal Download* operations and 30 entity structs —
+      served to an entirely anonymous caller. It is now harvested verbatim to
+      wsdl/naesb-eir-webregistry.wsdl. A follow-up anonymous SOAP POST of
+      DownloadRegistryVersion returned HTTP 200 with ReturnCode 1 / FAILURE and ErrorCodeDesc
+      "Please present a valid certificate that is associated with a NAESB EIR user",
+      confirming the data — but not the contract — is gated by the registry PKI.
   - url: https://naesbwry.oati.com/
     status: 000
     note: Same TLS chain failure. This host is linked directly from the NAESB homepage.

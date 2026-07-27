@@ -1,0 +1,368 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  wsdl/naesb-eir-webregistry.wsdl (30 *Struct type definitions), schemas/naesb-espi_v4.xsd,
+  schemas/naesb-customer_v4.xsd
+summary: >-
+  Two disjoint entity graphs. The EIR webRegistry models the North American wholesale
+  electric market as registered market participants (entities holding coded roles), the
+  physical and commercial points they schedule across, and the adjacency edges that make
+  e-tag paths valid. The ESPI graph models retail energy usage: a usage point, its meter
+  readings, the interval blocks under them, and the OAuth authorization that lets a third
+  party read them. They share no keys.
+domains:
+- domain: eir-webregistry
+  api: naesb:naesb-eir-webregistry
+  source: wsdl/naesb-eir-webregistry.wsdl
+  entity_count: 30
+  identity_conventions:
+    primary_key: ID
+    cross_reference_key: >-
+      TaggingEntityID for participants and TaggingPointID for points — these are the join keys
+      used across adjacency and path records, not the local ID.
+    external_keys:
+    - NERCID
+    - DUNS
+    effective_dating: >-
+      Almost every entity carries StartEffectiveDate and StopEffectiveDate, and participant
+      roles additionally carry ExpirationDate. The graph is bitemporal in practice: a read is
+      scoped by the EffectiveDate request parameter and by the registry publication Version.
+  entities:
+  - name: EntityStruct
+    operation: DownloadEntity
+    role: the root market participant record
+    key_fields: [ID, Entity_Type, NERCID, DUNS, ShortName, LongName, EntityCodeRole, TaggingEntityID]
+  - name: BAStruct
+    operation: DownloadBA
+    role: Balancing Authority
+    key_fields: [ID, Code, EntityName, ReliabilityAreaName, ReliabilityRegionName, MarketAreaName, InterconnectionName, TaggingEntityID]
+  - name: PSEStruct
+    operation: DownloadPSE
+    role: Purchasing-Selling Entity
+    key_fields: [ID, Code, EntityName, PSEType, ReliabilityRegionName, TaggingEntityID]
+  - name: TSPStruct
+    operation: DownloadTSP
+    role: Transmission Service Provider
+    key_fields: [ID, Code, EntityName, ReliabilityRegionName, TaggingEntityID]
+  - name: RCStruct
+    operation: DownloadRC
+    role: Reliability Coordinator
+    key_fields: [ID, Code, EntityName, ReliabilityArea, ReliabilityRegionName]
+  - name: ASPStruct
+    operation: DownloadASP
+    role: Agent Service Provider
+    key_fields: [ID, Code, EntityName]
+  - name: EROStruct
+    operation: DownloadERO
+    role: Electric Reliability Organization
+    key_fields: [ID, Code, EntityName]
+  - name: MOStruct
+    operation: DownloadMO
+    role: Market Operator
+    key_fields: [ID, Code, EntityName]
+  - name: RROStruct
+    operation: DownloadRRO
+    role: Regional Reliability Organization
+    key_fields: [ID, Code, EntityName, Region]
+  - name: PKICAStruct
+    operation: DownloadPKICA
+    role: NAESB-Authorized Certification Authority (the PKI trust anchor roster)
+    key_fields: [ID, Code, EntityName, ExpirationDate]
+  - name: ACAStruct
+    operation: DownloadACA
+    role: an individual certificate published by an Authorized Certification Authority
+    key_fields: [ID, PKICATaggingEntityID, PKICACode, PKICAName, CertificateURL, CertificateType]
+    enums:
+      CertificateType: [ROOT, INTERMEDIATE, ISSUER]
+  - name: InterconnectionStruct
+    operation: DownloadInterconnection
+    role: interconnection (Eastern / Western / ERCOT class of grid)
+    key_fields: [ID, Name]
+  - name: ControlZoneStruct
+    operation: DownloadControlZone
+    role: control zone within a Balancing Authority
+    key_fields: [ID, Name, BAName]
+  - name: PointTypeStruct
+    operation: DownloadSourceSinkPointType
+    role: vocabulary of point types
+    key_fields: [PointTypeID, PointTypeName]
+  - name: ProductTypeStruct
+    operation: DownloadProductType
+    role: vocabulary of transmission product types
+    key_fields: [ProductTypeID, ProductTypeName]
+  - name: ProductStruct
+    operation: DownloadProduct
+    role: transmission product instance
+    key_fields: [ID, Name, ProductTypeID]
+  - name: PORPODStruct
+    operation: DownloadPORPOD
+    role: point of receipt / point of delivery
+    key_fields: [ID, NERCID, Name, PointTypeName, TSPTaggingEntityID, BATaggingEntityID, TaggingPointID]
+  - name: SourceSinkStruct
+    operation: DownloadSourceSink
+    role: generation source / load sink point
+    key_fields: [ID, NERCID, Name, BATaggingEntityID, ControlZoneName, PSETaggingEntityID, PointTypeName, MRDResourceID, TaggingPointID]
+  - name: TransmissionPathStruct
+    operation: DownloadTransmissionPath
+    role: a registered POR-to-POD path on a TSP within a BA
+    key_fields: [BATaggingEntityID, TSPTaggingEntityID, PORTaggingPointID, PODTaggingPointID, Name, ApprovalID]
+  - name: BAAdjacencyStruct
+    operation: DownloadBAAdjacency
+    role: BA-to-BA adjacency edge (source/POD out, sink/POR in)
+    key_fields: [FromBATaggingEntityID, FromSourceTaggingPointID, FromPODTaggingPointID, ToBATaggingEntityID, ToSinkTaggingPointID, ToPORTaggingPointID]
+  - name: PODPORAdjacencyStruct
+    operation: DownloadPODPORAdjacency
+    role: TSP-to-TSP adjacency edge across a POD/POR seam
+    key_fields: [FromTSPTaggingEntityID, FromPODTaggingPointID, ToTSPTaggingEntityID, ToPORTaggingPointID]
+  - name: SinkPODAdjacencyStruct
+    operation: DownloadSinkPODAdjacency
+    role: sink-to-POD adjacency edge
+    key_fields: [FromBATaggingEntityID, FromPSETaggingEntityID, FromSinkTaggingPointID, ToTSPTaggingEntityID, ToPODTaggingPointID]
+  - name: SourcePORAdjacencyStruct
+    operation: DownloadSourcePORAdjacency
+    role: source-to-POR adjacency edge
+    key_fields: [FromBATaggingEntityID, FromPSETaggingEntityID, FromSourceTaggingPointID, ToTSPTaggingEntityID, ToPORTaggingPointID]
+  - name: PseudoTieStruct
+    operation: DownloadPseudoTie
+    role: pseudo-tie registration with ordered PseudoTieSegment children
+    key_fields: [ID, Designation, SourceBAName, SourceRCName, SourceContractNbr, SinkBAName, SinkRCName, SinkContractNbr]
+  - name: MRDFlowgateStruct
+    operation: DownloadMRDFlowgate
+    role: Market Redispatch flowgate
+    key_fields: [FlowgateNumber, FlowgateName, SC, CA]
+  - name: MRDResourceStruct
+    operation: DownloadMRDResource
+    role: Market Redispatch resource
+    key_fields: [MRDResourceID, CommonName, ResourceName]
+  - name: PendingEntityStruct
+    operation: DownloadPendingEntity
+    role: entity registration awaiting approval
+  - name: PendingEntityCodeRoleStruct
+    operation: DownloadPendingEntityCodeRole
+    role: entity code/role assignment awaiting approval
+  - name: RegistryVersionStruct
+    operation: DownloadRegistryVersion
+    role: the registry publication itself
+    key_fields: [VersionID, VersionCode, EffectiveDate, PublicationMethodCode, PublicationStatus, PublicationDT]
+    enums:
+      PublicationMethodCode: [U, S]
+      PublicationStatus: [ARCHIVE, ACTIVE, PENDING, FUTURE]
+  - name: OutputStruct
+    role: response envelope, not a domain entity
+    see: errors/naesb-error-codes.yml
+  relationships:
+  - from: BAStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName / TaggingEntityID
+  - from: PSEStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName / TaggingEntityID
+  - from: TSPStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName / TaggingEntityID
+  - from: RCStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName
+  - from: ASPStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName
+  - from: EROStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName
+  - from: MOStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName
+  - from: RROStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName
+  - from: PKICAStruct
+    to: EntityStruct
+    kind: belongs_to
+    via: EntityName
+  - from: PKICAStruct
+    to: ACAStruct
+    kind: has_many
+    via: PKICATaggingEntityID
+  - from: BAStruct
+    to: InterconnectionStruct
+    kind: belongs_to
+    via: InterconnectionName
+  - from: ControlZoneStruct
+    to: BAStruct
+    kind: belongs_to
+    via: BAName
+  - from: PORPODStruct
+    to: TSPStruct
+    kind: belongs_to
+    via: TSPTaggingEntityID
+  - from: PORPODStruct
+    to: BAStruct
+    kind: belongs_to
+    via: BATaggingEntityID
+  - from: PORPODStruct
+    to: PointTypeStruct
+    kind: belongs_to
+    via: PointTypeName
+  - from: SourceSinkStruct
+    to: BAStruct
+    kind: belongs_to
+    via: BATaggingEntityID
+  - from: SourceSinkStruct
+    to: PSEStruct
+    kind: belongs_to
+    via: PSETaggingEntityID
+  - from: SourceSinkStruct
+    to: ControlZoneStruct
+    kind: belongs_to
+    via: ControlZoneName
+  - from: SourceSinkStruct
+    to: MRDResourceStruct
+    kind: belongs_to
+    via: MRDResourceID
+  - from: TransmissionPathStruct
+    to: PORPODStruct
+    kind: has_one
+    via: PORTaggingPointID
+  - from: TransmissionPathStruct
+    to: PORPODStruct
+    kind: has_one
+    via: PODTaggingPointID
+  - from: TransmissionPathStruct
+    to: TSPStruct
+    kind: belongs_to
+    via: TSPTaggingEntityID
+  - from: ProductStruct
+    to: ProductTypeStruct
+    kind: belongs_to
+    via: ProductTypeID
+  - from: BAAdjacencyStruct
+    to: BAStruct
+    kind: belongs_to
+    via: FromBATaggingEntityID / ToBATaggingEntityID
+  - from: PODPORAdjacencyStruct
+    to: TSPStruct
+    kind: belongs_to
+    via: FromTSPTaggingEntityID / ToTSPTaggingEntityID
+  - from: PseudoTieStruct
+    to: PseudoTieSegment
+    kind: has_many
+    via: PseudoTieSegments
+  - from: PseudoTieStruct
+    to: BAStruct
+    kind: belongs_to
+    via: SourceBAName / SinkBAName
+  - from: PseudoTieStruct
+    to: RCStruct
+    kind: belongs_to
+    via: SourceRCName / SinkRCName
+- domain: espi-green-button
+  api: naesb:naesb-espi-green-button
+  source: schemas/naesb-espi_v4.xsd, schemas/naesb-customer_v4.xsd
+  identity_conventions:
+    base_type: IdentifiedObject
+    linking: Atom self/up/related links between resources at the Data Custodian
+  entities:
+  - name: ApplicationInformation
+    role: third-party client registration and the OAuth endpoints to use
+    key_fields: [authorizationServerUri, authorizationServerAuthorizationEndpoint, authorizationServerTokenEndpoint, authorizationServerRegistrationEndpoint, GrantType, TokenEndPointMethod, scope, dataCustodianApplicationStatus]
+  - name: Authorization
+    role: the retail customer's grant of access to a third party
+    key_fields: [authorizedPeriod, scope, error, status]
+  - name: UsagePoint
+    role: the metered point of service
+    key_fields: [ServiceCategory, ServiceStatus, amiBillingReady, connectionState]
+  - name: MeterReading
+    role: a set of readings of one ReadingType at a UsagePoint
+  - name: ReadingType
+    role: the measurement semantics
+    key_fields: [accumulationBehaviour, commodity, dataQualifier, flowDirection, interharmonic, kind, measuringPeriod, phase, powerOfTenMultiplier, timeAttribute, uom]
+  - name: IntervalBlock
+    role: a time-bounded container of IntervalReading
+  - name: IntervalReading
+    role: an individual interval measurement
+  - name: ReadingQuality
+    role: quality qualifier on a reading
+  - name: ElectricPowerUsageSummary
+    role: aggregated usage and cost summary
+  - name: ElectricPowerQualitySummary
+    role: aggregated power quality summary
+  - name: UsageSummary
+    role: generalized usage summary introduced alongside v4.0
+  - name: LocalTimeParameters
+    role: DST and timezone rules for interpreting interval timestamps
+    key_fields: [dstStartRule, dstEndRule, dstOffset, tzOffset]
+  - name: Customer
+    source: schemas/naesb-customer_v4.xsd
+  - name: CustomerAccount
+    source: schemas/naesb-customer_v4.xsd
+  - name: CustomerAgreement
+    source: schemas/naesb-customer_v4.xsd
+  - name: ServiceLocation
+    source: schemas/naesb-customer_v4.xsd
+  - name: ServiceSupplier
+    source: schemas/naesb-customer_v4.xsd
+  - name: Meter
+    source: schemas/naesb-customer_v4.xsd
+  - name: EndDevice
+    source: schemas/naesb-customer_v4.xsd
+  - name: Statement
+    source: schemas/naesb-customer_v4.xsd
+  - name: PricingStructure
+    source: schemas/naesb-customer_v4.xsd
+  - name: DemandResponseProgram
+    source: schemas/naesb-customer_v4.xsd
+  - name: DRProgramNomination
+    source: schemas/naesb-customer_v4.xsd
+  relationships:
+  - from: Authorization
+    to: ApplicationInformation
+    kind: belongs_to
+    via: Atom related link
+  - from: UsagePoint
+    to: MeterReading
+    kind: has_many
+    via: Atom related link
+  - from: MeterReading
+    to: ReadingType
+    kind: has_one
+    via: Atom related link
+  - from: MeterReading
+    to: IntervalBlock
+    kind: has_many
+    via: Atom related link
+  - from: IntervalBlock
+    to: IntervalReading
+    kind: has_many
+    via: contained sequence
+  - from: IntervalReading
+    to: ReadingQuality
+    kind: has_many
+    via: contained sequence
+  - from: UsagePoint
+    to: ElectricPowerUsageSummary
+    kind: has_many
+    via: Atom related link
+  - from: UsagePoint
+    to: LocalTimeParameters
+    kind: has_one
+    via: Atom related link
+  - from: CustomerAccount
+    to: Customer
+    kind: belongs_to
+  - from: CustomerAgreement
+    to: CustomerAccount
+    kind: belongs_to
+  - from: ServiceLocation
+    to: UsagePoint
+    kind: has_many
+  - from: Meter
+    to: EndDevice
+    kind: belongs_to

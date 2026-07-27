@@ -1,0 +1,79 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.naesb.org/weq/weq_eir.asp, https://www.naesb.org/ESPI_Standards.asp,
+  https://www.naesb.org/weq/weq_eir_requests.asp, plus the harvested ESPI schemas and WSDL.
+summary: >-
+  NAESB versions standards, not endpoints. There is no API deprecation policy, no Sunset or
+  Deprecation header support, no SLA and no status page. What does exist is a genuine
+  effective-dated release process: standards move by quadrant version with published
+  effective dates, and the EIR registry publishes its own ACTIVE / PENDING / FUTURE / ARCHIVE
+  publication versions through the API itself.
+versioning:
+  standards:
+    scheme: quadrant version number with a published effective date
+    espi_current: 4.0.20231213
+    espi_previous: 3.3.20200320
+    espi_docs: https://www.naesb.org/ESPI_Standards.asp
+    note: >-
+      ESPI v4.0 was published December 2023 and supersedes v3.3 (published January 30, 2020,
+      with minor change MC20001 applied effective March 20, 2020). Both schema generations
+      remain harvested in schemas/ because Data Custodian deployments straddle them.
+  registry_data:
+    scheme: registry publication version, queryable at runtime
+    operation: DownloadRegistryVersion
+    statuses:
+    - ARCHIVE
+    - ACTIVE
+    - PENDING
+    - FUTURE
+    note: >-
+      Consumers can see a future publication before it becomes active and can pin reads to a
+      specific VersionCode plus EffectiveDate. This is the closest thing NAESB has to a
+      forward-looking release calendar and it is machine-readable.
+  transport:
+    scheme: none
+    note: The webRegistry endpoint URL and WSDL carry no version segment.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  practice: >-
+    Retirements are announced by dated email notice rather than by policy. The 2025-11-07
+    announcement is the clearest published example: the legacy WECC reliability area was
+    removed from the registry after OATI confirmed no entity registrations still used it.
+    Certification marks also expire on a fixed two-year clock, after which re-certification
+    is required.
+  deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No SLA is published. Update announcements state the expected impact per deployment
+    ("no interruption to system operations is expected" for a rolling fix; "users will
+    experience a brief interruption in registry access beginning at 7:00 PM Central Time"
+    for a disruptive one), which is a per-change commitment rather than a standing target.
+status_page: null
+status_page_note: >-
+  No status page exists. status.naesb.org does not resolve. Operational support is a phone
+  line: the OATI Help Desk at 763-201-2020, referenced in every EIR update announcement.
+maintenance:
+  notification_channel: email announcement to WEQ members and NAESB EIR users, mirrored at https://www.naesb.org/weq/weq_eir.asp
+  typical_lead_time: 2 to 33 days observed across 2025-2026 announcements
+  typical_window: 7:00 PM Central Time, occasionally 10:00 AM Central Time
+roadmap:
+  url: https://www.naesb.org/weq/weq_eir_requests.asp
+  mechanism: >-
+    WEQ EIR Enhancement Requests. Industry participants file an Enhancement Request Form; the
+    CISS (formerly JESS) Subcommittee publishes a recommendation and NAESB posts an
+    announcement. Each request is tracked with an ER-year-sequence identifier (ER18002,
+    ER18001, ER17001, ER16003, ER16002, ER16001, ER14001, ER13002, ER13001).
+  note: >-
+    This is a real, public, dated change-intake pipeline — the nearest published equivalent of
+    a roadmap. The most recent posted request is ER18002 (August 1, 2018); the process page
+    itself remains current.
+support:
+  helpdesk: OATI Help Desk, 763-201-2020
+  naesb_office: 713-356-0060
+  email: naesb@naesb.org

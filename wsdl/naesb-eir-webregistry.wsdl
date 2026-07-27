@@ -1,0 +1,1826 @@
+<?xml version="1.0"?>
+<definitions targetNamespace="http://www.oati.net/namespace"
+		xmlns:tns="http://www.oati.net/namespace"
+		xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+		xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+
+<xs:schema
+xmlns="http://www.oati.net/namespace/Registry/WREG_WebServices"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.oati.net/namespace/Registry/WREG_WebServices"
+elementFormDefault="qualified"
+attributeFormDefault="unqualified">
+
+	<!-- Request -->
+	<xs:element name="EffectiveDate" type="EffectiveDate" />
+	<xs:element name="Version" type="xs:string" />
+
+	<!-- Response -->
+	<xs:element name="OutputStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ReturnCode" type="PositiveInteger" />
+				<xs:element name="ReturnCodeDesc" type="xs:string" />
+				<xs:element ref="Error" minOccurs="0" />
+				<xs:element ref="Success" minOccurs="0" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Error">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ErrorStruct" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ErrorStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ErrorCode" type="PositiveInteger" />
+				<xs:element name="ErrorCodeDesc" type="xs:string" />
+				<xs:element name="ParentElementIndex" type="xs:string" minOccurs="0" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Success">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EntityStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="BAStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PSEStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="TSPStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="RCStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="ASPStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="EROStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="MOStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PKICAStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="RROStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="InterconnectionStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="ControlZoneStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PointTypeStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="ProductTypeStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="MRDFlowgateStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="MRDResourceStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="RegistryVersionStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PendingEntityCodeRoleStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PORPODStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="ProductStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="SourceSinkStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="TransmissionPathStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PODPORAdjacencyStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="BAAdjacencyStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="SinkPODAdjacencyStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="SourcePORAdjacencyStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="ACAStruct" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="PseudoTieStruct" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--Entity Struct -->
+	<xs:element name="EntityStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="Entity_Type" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="DUNS" type="xs:string" />
+				<xs:element name="ShortName" type="xs:string" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="EntityCodeRole" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="InitialDate" type="xs:string" />
+				<xs:element name="URL" type="xs:string" />
+				<xs:element name="PredecessorName" type="xs:string" />
+				<xs:element name="AddressLine1" type="xs:string" />
+				<xs:element name="AddressLine2" type="xs:string" />
+				<xs:element name="City" type="xs:string" />
+				<xs:element name="State" type="xs:string" />
+				<xs:element name="PostalCode" type="xs:string" />
+				<xs:element name="CountryCode" type="xs:string" />
+				<xs:element name="PrimaryContactName" type="xs:string" />
+				<xs:element name="PrimaryContactPhoneNbr" type="xs:string" />
+				<xs:element name="PrimaryContactFaxNbr" type="xs:string" />
+				<xs:element name="PrimaryContactEmail" type="xs:string" />
+				<xs:element name="AdminContactName" type="xs:string" />
+				<xs:element name="AdminContactPhoneNbr" type="xs:string" />
+				<xs:element name="AdminContactFaxNbr" type="xs:string" />
+				<xs:element name="AdminContactEmail" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- BA Struct -->
+	<xs:element name="BAStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="ReliabilityAreaName" type="xs:string" />
+				<xs:element name="ReliabilityRegionName" type="xs:string" />
+				<xs:element name="MarketAreaName" type="xs:string" />
+				<xs:element name="InterconnectionName" type="xs:string" />
+				<xs:element name="BA" type="xs:string" />
+				<xs:element name="NHMBAMFlagStr" type="xs:string" />
+				<xs:element name="PseudoCAFlagStr" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+				<xs:element name="AgentURL" type="xs:string" />
+				<xs:element name="AuthorityURL" type="xs:string" />
+				<xs:element name="ApprovalURL" type="xs:string" />
+				<xs:element name="ForwardURL" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- PSEStruct -->
+	<xs:element name="PSEStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="PSEType" type="xs:string" />
+				<xs:element name="ReliabilityRegionName" type="xs:string" />
+				<xs:element name="NHMBAMFlagStr" type="xs:string" />
+				<xs:element name="PseudoCAFlagStr" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+				<xs:element name="AgentURL" type="xs:string" />
+				<xs:element name="AuthorityURL" type="xs:string" />
+				<xs:element name="ApprovalURL" type="xs:string" />
+				<xs:element name="ForwardURL" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- TSPStruct -->
+	<xs:element name="TSPStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="ReliabilityRegionName" type="xs:string" />
+				<xs:element name="NHMBAMFlagStr" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+				<xs:element name="AgentURL" type="xs:string" />
+				<xs:element name="AuthorityURL" type="xs:string" />
+				<xs:element name="ApprovalURL" type="xs:string" />
+				<xs:element name="ForwardURL" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- RCStruct -->
+	<xs:element name="RCStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="ReliabilityArea" type="xs:string" />
+				<xs:element name="ReliabilityRegionName" type="xs:string" />
+				<xs:element name="NHMBAMFlagStr" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+				<xs:element name="AgentURL" type="xs:string" />
+				<xs:element name="AuthorityURL" type="xs:string" />
+				<xs:element name="ApprovalURL" type="xs:string" />
+				<xs:element name="ForwardURL" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- ASPStruct -->
+	<xs:element name="ASPStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- EROStruct -->
+	<xs:element name="EROStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- MOStruct -->
+	<xs:element name="MOStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+				<xs:element name="AgentURL" type="xs:string" />
+				<xs:element name="AuthorityURL" type="xs:string" />
+				<xs:element name="ApprovalURL" type="xs:string" />
+				<xs:element name="ForwardURL" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+				<xs:element ref="BAAssociations" minOccurs="0"/>
+				<xs:element ref="TSPAssociations" minOccurs="0" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="BAAssociations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BA" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BA">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger"/>
+				<xs:element name="Name" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TSPAssociations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TSP" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TSP">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="Name" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- PKICAStruct -->
+	<xs:element name="PKICAStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- RROStruct -->
+	<xs:element name="RROStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ExpirationDate" type="ExpirationDate" />
+				<xs:element name="Region" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- Pending Code-Role Struct -->
+	<xs:element name="PendingEntityCodeRoleStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="LongName" type="xs:string" />
+				<xs:element name="Code" type="xs:string" />
+				<xs:element name="EntityName" type="xs:string" />
+				<xs:element name="MarketArea" type="xs:string" />
+				<xs:element name="Region" type="xs:string" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="PSEType" type="xs:string" />
+				<xs:element name="ReliabilityArea" type="xs:string" />
+				<xs:element name="ReliabilityAreaName" type="xs:string" />
+				<xs:element name="ReliabilityRegionName" type="xs:string" />
+				<xs:element name="MarketAreaName" type="xs:string" />
+				<xs:element name="InterconnectionName" type="xs:string" />
+				<xs:element name="BA" type="xs:string" />
+				<xs:element name="NHMBAMFlagStr" type="xs:string" />
+				<xs:element name="PseudoCAFlagStr" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="Hr24ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Hr24ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt1ContactName" type="xs:string" />
+				<xs:element name="Alt1ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt1ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt2ContactName" type="xs:string" />
+				<xs:element name="Alt2ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt2ContactFaxNbr" type="xs:string" />
+				<xs:element name="Alt3ContactName" type="xs:string" />
+				<xs:element name="Alt3ContactPhoneNbr" type="xs:string" />
+				<xs:element name="Alt3ContactFaxNbr" type="xs:string" />
+				<xs:element name="AgentURL" type="xs:string" />
+				<xs:element name="AuthorityURL" type="xs:string" />
+				<xs:element name="ApprovalURL" type="xs:string" />
+				<xs:element name="ForwardURL" type="xs:string" />
+				<xs:element name="TaggingEntityID" type="xs:string" />
+				<xs:element name="RoleName" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- InterconnectionStruct -->
+	<xs:element name="InterconnectionStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="Name" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- ControlZoneStruct -->
+	<xs:element name="ControlZoneStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="Name" type="xs:string" />
+				<xs:element name="BAName" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- PointTypeStruct -->
+	<xs:element name="PointTypeStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="PointTypeID" type="PositiveInteger" />
+				<xs:element name="PointTypeName" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- ProductTypeStruct -->
+	<xs:element name="ProductTypeStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ProductTypeID" type="PositiveInteger" />
+				<xs:element name="ProductTypeName" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- MRDFlowgatesStruct -->
+	<xs:element name="MRDFlowgateStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="FlowgateNumber" type="PositiveInteger" />
+				<xs:element name="FlowgateName" type="xs:string" />
+				<xs:element name="SC" type="xs:string" />
+				<xs:element name="CA" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- MRDResourcesStruct -->
+	<xs:element name="MRDResourceStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="MRDResourceID" type="PositiveInteger" />
+				<xs:element name="CommonName" type="xs:string" />
+				<xs:element name="ResourceName" type="xs:string" />
+				<xs:element name="Hr24ContactName" type="xs:string" />
+				<xs:element name="ResourcePhoneNbr" type="xs:string" />
+				<xs:element name="ResourceFaxNbr" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- PORPODStruct -->
+	<xs:element name="PORPODStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="Name" type="xs:string" />
+				<xs:element name="PointTypeName" type="xs:string" />
+				<xs:element name="TSPTaggingEntityID" type="xs:string" />
+				<xs:element name="TSPName" type="xs:string" />
+				<xs:element name="BATaggingEntityID" type="xs:string" />
+				<xs:element name="BAName" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="TaggingPointID" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- SourceSinkStruct -->
+	<xs:element name="SourceSinkStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="NERCID" type="xs:string" />
+				<xs:element name="Name" type="xs:string" />
+				<xs:element name="BATaggingEntityID" type="xs:string" />
+				<xs:element name="BAName" type="xs:string" />
+				<xs:element name="ControlZoneName" type="xs:string" />
+				<xs:element name="PSETaggingEntityID" type="xs:string" />
+				<xs:element name="PSEName" type="xs:string" />
+				<xs:element name="PointTypeName" type="xs:string" />
+				<xs:element name="MRDResourceID" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="TaggingPointID" type="xs:string" />
+				<xs:element name="ApprovalTaggingEntityID" type="xs:string" />
+				<xs:element name="ApprovalTaggingEntityRole" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- ProductStruct -->
+	<xs:element name="ProductStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="Name" type="xs:string" />
+				<xs:element name="Description" type="xs:string" />
+				<xs:element name="ProductTypeID" type="PositiveInteger" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- TransmissionPathStruct -->
+	<xs:element name="TransmissionPathStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="BATaggingEntityID" type="PositiveInteger" />
+				<xs:element name="BAName" type="xs:string" />
+				<xs:element name="TSPTaggingEntityID" type="PositiveInteger" />
+				<xs:element name="TSPName" type="xs:string" />
+				<xs:element name="PORTaggingPointID" type="PositiveInteger" />
+				<xs:element name="PORName" type="xs:string" />
+				<xs:element name="PODTaggingPointID" type="PositiveInteger" />
+				<xs:element name="PODName" type="xs:string" />
+				<xs:element name="Name" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ApprovalID" type="PositiveInteger" />
+				<xs:element name="UpdateDT" type="xs:dateTime" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- BAAdjacencyStruct -->
+	<xs:element name="BAAdjacencyStruct">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FromBATaggingEntityID" type="PositiveInteger" />
+				<xs:element name="FromBAName" type="xs:string" />
+				<xs:element name="FromSourceTaggingPointID" type="PositiveInteger"  minOccurs="0" />
+				<xs:element name="FromSourceName" type="xs:string" minOccurs="0" />
+				<xs:element name="FromPODTaggingPointID" type="PositiveInteger"  minOccurs="0" />
+				<xs:element name="FromPODName" type="xs:string" minOccurs="0" />
+				<xs:element name="ToBATaggingEntityID" type="PositiveInteger" />
+				<xs:element name="ToBAName" type="xs:string" />
+				<xs:element name="ToSinkTaggingPointID" type="PositiveInteger" minOccurs="0" />
+				<xs:element name="ToSinkName" type="xs:string" minOccurs="0" />
+				<xs:element name="ToPORTaggingPointID" type="PositiveInteger" minOccurs="0" />
+				<xs:element name="ToPORName" type="xs:string" minOccurs="0" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ApprovalID" type="PositiveInteger" />
+				<xs:element name="UpdateDT" type="xs:dateTime" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- PODPORAdjacencyStruct -->
+	<xs:element name="PODPORAdjacencyStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="FromTSPTaggingEntityID" type="PositiveInteger" />
+				<xs:element name="FromTSPName" type="xs:string" />
+				<xs:element name="FromPODTaggingPointID" type="PositiveInteger" />
+				<xs:element name="FromPODName" type="xs:string" />
+				<xs:element name="ToTSPTaggingEntityID" type="PositiveInteger" />
+				<xs:element name="ToTSPName" type="xs:string" />
+				<xs:element name="ToPORTaggingPointID" type="PositiveInteger" />
+				<xs:element name="ToPORName" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ApprovalID" type="PositiveInteger" />
+				<xs:element name="UpdateDT" type="xs:dateTime" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- SinkPODAdjacencyStruct -->
+	<xs:element name="SinkPODAdjacencyStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="FromBATaggingEntityID" type="PositiveInteger" />
+				<xs:element name="FromBAName" type="xs:string" />
+				<xs:element name="FromPSETaggingEntityID" type="PositiveInteger" />
+				<xs:element name="FromPSEName" type="xs:string" />
+				<xs:element name="FromSinkTaggingPointID" type="PositiveInteger" />
+				<xs:element name="FromSinkName" type="xs:string" />
+				<xs:element name="ToTSPTaggingEntityID" type="PositiveInteger" />
+				<xs:element name="ToTSPName" type="xs:string" />
+				<xs:element name="ToPODTaggingPointID" type="PositiveInteger" />
+				<xs:element name="ToPODName" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ApprovalID" type="PositiveInteger" />
+				<xs:element name="UpdateDT" type="xs:dateTime" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- SourcePORAdjacencyStruct -->
+	<xs:element name="SourcePORAdjacencyStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="FromBATaggingEntityID" type="PositiveInteger" />
+				<xs:element name="FromBAName" type="xs:string" />
+				<xs:element name="FromPSETaggingEntityID" type="PositiveInteger" />
+				<xs:element name="FromPSEName" type="xs:string" />
+				<xs:element name="FromSourceTaggingPointID" type="PositiveInteger" />
+				<xs:element name="FromSourceName" type="xs:string" />
+				<xs:element name="ToTSPTaggingEntityID" type="PositiveInteger" />
+				<xs:element name="ToTSPName" type="xs:string" />
+				<xs:element name="ToPORTaggingPointID" type="PositiveInteger" />
+				<xs:element name="ToPORName" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element name="ApprovalID" type="PositiveInteger" />
+				<xs:element name="UpdateDT" type="xs:dateTime" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- ACAStruct -->
+	<xs:element name="ACAStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="xs:string" />
+				<xs:element name="PKICATaggingEntityID" type="PositiveInteger" />
+				<xs:element name="PKICACode" type="xs:string" />
+				<xs:element name="PKICAName" type="xs:string" />
+				<xs:element name="CertificateURL" type="xs:string" />
+				<xs:element name="CertificateType" type="ACACertType" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- PseudoTieStruct -->
+	<xs:element name="PseudoTieStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="ID" type="PositiveInteger" />
+				<xs:element name="PseudoTieComment" type="xs:string" />
+				<xs:element name="Designation" type="xs:string" />
+				<xs:element name="SourceBAName" type="xs:string" />
+				<xs:element name="SourceName" type="xs:string" />
+				<xs:element name="SourceRCName" type="xs:string" />
+				<xs:element name="SourceContractNbr" type="xs:string" />
+				<xs:element name="SinkBAName" type="xs:string" />
+				<xs:element name="SinkName" type="xs:string" />
+				<xs:element name="SinkRCName" type="xs:string" />
+				<xs:element name="SinkContractNbr" type="xs:string" />
+				<xs:element name="StartEffectiveDate" type="EffectiveDate" />
+				<xs:element name="StopEffectiveDate" type="EffectiveDate" />
+				<xs:element ref="PseudoTieSegments" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PseudoTieSegments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PseudoTieSegment" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PseudoTieSegment">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="SegmentNbr" type="PositiveInteger" />
+				<xs:element name="TSPName" type="xs:string" />
+				<xs:element name="PORName" type="xs:string" />
+				<xs:element name="PODName" type="xs:string" />
+				<xs:element name="BAName" type="xs:string" />
+				<xs:element name="RCName" type="xs:string" />
+				<xs:element name="ContractNbr" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- RegistryVersionStruct -->
+	<xs:element name="RegistryVersionStruct">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="VersionID" type="PositiveInteger" />
+				<xs:element name="VersionCode" type="xs:string" />
+				<xs:element name="EffectiveDate" type="xs:string" />
+				<xs:element name="PublicationMethodCode" type="PublicationMethod" />
+				<xs:element name="PublicationStatus" type="PublicationStatus" />
+				<xs:element name="PublicationDT" type="xs:dateTime" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<!-- Simple Data Types -->
+	<xs:simpleType name="PositiveInteger">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]+" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StdDecimal">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="6" />
+			<xs:totalDigits value="19" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveDate">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2}/[0-9]{2}/[0-9]{4}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDate">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-9]{2}/[0-9]{2}/[0-9]{4})?" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ACACertType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ROOT"/>
+			<xs:enumeration value="INTERMEDIATE"/>
+			<xs:enumeration value="ISSUER"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PublicationMethod">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PublicationStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ARCHIVE"/>
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="PENDING"/>
+			<xs:enumeration value="FUTURE"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
+    <s:schema elementFormDefault="unqualified" targetNamespace="http://www.oati.net/namespace"
+			xmlns:s="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns_0="http://www.oati.net/namespace/Registry/WREG_WebServices">
+      <s:element name="DownloadTSP">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadTSPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadTransmissionPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadTransmissionPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSourceSinkPointType">
+        <s:complexType>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSourceSinkPointTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSourceSink">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSourceSinkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSourcePORAdjacency">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSourcePORAdjacencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSinkPODAdjacency">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadSinkPODAdjacencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadRRO">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadRROResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadRegistryVersion">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadRegistryVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadRC">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadRCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPseudoTie">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPseudoTieResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPSE">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPSEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadProductType">
+        <s:complexType>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadProductTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPORPODPointType">
+        <s:complexType>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPORPODPointTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPORPOD">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPORPODResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPODPORAdjacency">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPODPORAdjacencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPKICA">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPKICAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPendingEntityCodeRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPendingEntityCodeRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPendingEntity">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadPendingEntityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadMRDResource">
+        <s:complexType>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadMRDResourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadMRDFlowgate">
+        <s:complexType>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadMRDFlowgateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadMO">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadMOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadInterconnection">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadInterconnectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadERO">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadEROResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadEntity">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadEntityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadControlZone">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadControlZoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadBAAdjacency">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadBAAdjacencyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadBA">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadBAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadASP">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadASPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadACA">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:Version" minOccurs="0" maxOccurs="1"/>
+            <s:element ref="tns_0:EffectiveDate" minOccurs="0" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadACAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="tns_0:OutputStruct" minOccurs="1" maxOccurs="1"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="DownloadTSPSoapIn">
+    <part name="parameters" element="tns:DownloadTSP"/>
+  </message>
+  <message name="DownloadTSPSoapOut">
+    <part name="parameters" element="tns:DownloadTSPResponse"/>
+  </message>
+  <message name="DownloadTransmissionPathSoapIn">
+    <part name="parameters" element="tns:DownloadTransmissionPath"/>
+  </message>
+  <message name="DownloadTransmissionPathSoapOut">
+    <part name="parameters" element="tns:DownloadTransmissionPathResponse"/>
+  </message>
+  <message name="DownloadSourceSinkPointTypeSoapIn">
+    <part name="parameters" element="tns:DownloadSourceSinkPointType"/>
+  </message>
+  <message name="DownloadSourceSinkPointTypeSoapOut">
+    <part name="parameters" element="tns:DownloadSourceSinkPointTypeResponse"/>
+  </message>
+  <message name="DownloadSourceSinkSoapIn">
+    <part name="parameters" element="tns:DownloadSourceSink"/>
+  </message>
+  <message name="DownloadSourceSinkSoapOut">
+    <part name="parameters" element="tns:DownloadSourceSinkResponse"/>
+  </message>
+  <message name="DownloadSourcePORAdjacencySoapIn">
+    <part name="parameters" element="tns:DownloadSourcePORAdjacency"/>
+  </message>
+  <message name="DownloadSourcePORAdjacencySoapOut">
+    <part name="parameters" element="tns:DownloadSourcePORAdjacencyResponse"/>
+  </message>
+  <message name="DownloadSinkPODAdjacencySoapIn">
+    <part name="parameters" element="tns:DownloadSinkPODAdjacency"/>
+  </message>
+  <message name="DownloadSinkPODAdjacencySoapOut">
+    <part name="parameters" element="tns:DownloadSinkPODAdjacencyResponse"/>
+  </message>
+  <message name="DownloadRROSoapIn">
+    <part name="parameters" element="tns:DownloadRRO"/>
+  </message>
+  <message name="DownloadRROSoapOut">
+    <part name="parameters" element="tns:DownloadRROResponse"/>
+  </message>
+  <message name="DownloadRegistryVersionSoapIn">
+    <part name="parameters" element="tns:DownloadRegistryVersion"/>
+  </message>
+  <message name="DownloadRegistryVersionSoapOut">
+    <part name="parameters" element="tns:DownloadRegistryVersionResponse"/>
+  </message>
+  <message name="DownloadRCSoapIn">
+    <part name="parameters" element="tns:DownloadRC"/>
+  </message>
+  <message name="DownloadRCSoapOut">
+    <part name="parameters" element="tns:DownloadRCResponse"/>
+  </message>
+  <message name="DownloadPseudoTieSoapIn">
+    <part name="parameters" element="tns:DownloadPseudoTie"/>
+  </message>
+  <message name="DownloadPseudoTieSoapOut">
+    <part name="parameters" element="tns:DownloadPseudoTieResponse"/>
+  </message>
+  <message name="DownloadPSESoapIn">
+    <part name="parameters" element="tns:DownloadPSE"/>
+  </message>
+  <message name="DownloadPSESoapOut">
+    <part name="parameters" element="tns:DownloadPSEResponse"/>
+  </message>
+  <message name="DownloadProductTypeSoapIn">
+    <part name="parameters" element="tns:DownloadProductType"/>
+  </message>
+  <message name="DownloadProductTypeSoapOut">
+    <part name="parameters" element="tns:DownloadProductTypeResponse"/>
+  </message>
+  <message name="DownloadProductSoapIn">
+    <part name="parameters" element="tns:DownloadProduct"/>
+  </message>
+  <message name="DownloadProductSoapOut">
+    <part name="parameters" element="tns:DownloadProductResponse"/>
+  </message>
+  <message name="DownloadPORPODPointTypeSoapIn">
+    <part name="parameters" element="tns:DownloadPORPODPointType"/>
+  </message>
+  <message name="DownloadPORPODPointTypeSoapOut">
+    <part name="parameters" element="tns:DownloadPORPODPointTypeResponse"/>
+  </message>
+  <message name="DownloadPORPODSoapIn">
+    <part name="parameters" element="tns:DownloadPORPOD"/>
+  </message>
+  <message name="DownloadPORPODSoapOut">
+    <part name="parameters" element="tns:DownloadPORPODResponse"/>
+  </message>
+  <message name="DownloadPODPORAdjacencySoapIn">
+    <part name="parameters" element="tns:DownloadPODPORAdjacency"/>
+  </message>
+  <message name="DownloadPODPORAdjacencySoapOut">
+    <part name="parameters" element="tns:DownloadPODPORAdjacencyResponse"/>
+  </message>
+  <message name="DownloadPKICASoapIn">
+    <part name="parameters" element="tns:DownloadPKICA"/>
+  </message>
+  <message name="DownloadPKICASoapOut">
+    <part name="parameters" element="tns:DownloadPKICAResponse"/>
+  </message>
+  <message name="DownloadPendingEntityCodeRoleSoapIn">
+    <part name="parameters" element="tns:DownloadPendingEntityCodeRole"/>
+  </message>
+  <message name="DownloadPendingEntityCodeRoleSoapOut">
+    <part name="parameters" element="tns:DownloadPendingEntityCodeRoleResponse"/>
+  </message>
+  <message name="DownloadPendingEntitySoapIn">
+    <part name="parameters" element="tns:DownloadPendingEntity"/>
+  </message>
+  <message name="DownloadPendingEntitySoapOut">
+    <part name="parameters" element="tns:DownloadPendingEntityResponse"/>
+  </message>
+  <message name="DownloadMRDResourceSoapIn">
+    <part name="parameters" element="tns:DownloadMRDResource"/>
+  </message>
+  <message name="DownloadMRDResourceSoapOut">
+    <part name="parameters" element="tns:DownloadMRDResourceResponse"/>
+  </message>
+  <message name="DownloadMRDFlowgateSoapIn">
+    <part name="parameters" element="tns:DownloadMRDFlowgate"/>
+  </message>
+  <message name="DownloadMRDFlowgateSoapOut">
+    <part name="parameters" element="tns:DownloadMRDFlowgateResponse"/>
+  </message>
+  <message name="DownloadMOSoapIn">
+    <part name="parameters" element="tns:DownloadMO"/>
+  </message>
+  <message name="DownloadMOSoapOut">
+    <part name="parameters" element="tns:DownloadMOResponse"/>
+  </message>
+  <message name="DownloadInterconnectionSoapIn">
+    <part name="parameters" element="tns:DownloadInterconnection"/>
+  </message>
+  <message name="DownloadInterconnectionSoapOut">
+    <part name="parameters" element="tns:DownloadInterconnectionResponse"/>
+  </message>
+  <message name="DownloadEROSoapIn">
+    <part name="parameters" element="tns:DownloadERO"/>
+  </message>
+  <message name="DownloadEROSoapOut">
+    <part name="parameters" element="tns:DownloadEROResponse"/>
+  </message>
+  <message name="DownloadEntitySoapIn">
+    <part name="parameters" element="tns:DownloadEntity"/>
+  </message>
+  <message name="DownloadEntitySoapOut">
+    <part name="parameters" element="tns:DownloadEntityResponse"/>
+  </message>
+  <message name="DownloadControlZoneSoapIn">
+    <part name="parameters" element="tns:DownloadControlZone"/>
+  </message>
+  <message name="DownloadControlZoneSoapOut">
+    <part name="parameters" element="tns:DownloadControlZoneResponse"/>
+  </message>
+  <message name="DownloadBAAdjacencySoapIn">
+    <part name="parameters" element="tns:DownloadBAAdjacency"/>
+  </message>
+  <message name="DownloadBAAdjacencySoapOut">
+    <part name="parameters" element="tns:DownloadBAAdjacencyResponse"/>
+  </message>
+  <message name="DownloadBASoapIn">
+    <part name="parameters" element="tns:DownloadBA"/>
+  </message>
+  <message name="DownloadBASoapOut">
+    <part name="parameters" element="tns:DownloadBAResponse"/>
+  </message>
+  <message name="DownloadASPSoapIn">
+    <part name="parameters" element="tns:DownloadASP"/>
+  </message>
+  <message name="DownloadASPSoapOut">
+    <part name="parameters" element="tns:DownloadASPResponse"/>
+  </message>
+  <message name="DownloadACASoapIn">
+    <part name="parameters" element="tns:DownloadACA"/>
+  </message>
+  <message name="DownloadACASoapOut">
+    <part name="parameters" element="tns:DownloadACAResponse"/>
+  </message>
+  <portType name="WREG_WebServicesSoap">
+    <operation name="DownloadTSP">
+      <input message="tns:DownloadTSPSoapIn"/>
+      <output message="tns:DownloadTSPSoapOut"/>
+    </operation>
+    <operation name="DownloadTransmissionPath">
+      <input message="tns:DownloadTransmissionPathSoapIn"/>
+      <output message="tns:DownloadTransmissionPathSoapOut"/>
+    </operation>
+    <operation name="DownloadSourceSinkPointType">
+      <input message="tns:DownloadSourceSinkPointTypeSoapIn"/>
+      <output message="tns:DownloadSourceSinkPointTypeSoapOut"/>
+    </operation>
+    <operation name="DownloadSourceSink">
+      <input message="tns:DownloadSourceSinkSoapIn"/>
+      <output message="tns:DownloadSourceSinkSoapOut"/>
+    </operation>
+    <operation name="DownloadSourcePORAdjacency">
+      <input message="tns:DownloadSourcePORAdjacencySoapIn"/>
+      <output message="tns:DownloadSourcePORAdjacencySoapOut"/>
+    </operation>
+    <operation name="DownloadSinkPODAdjacency">
+      <input message="tns:DownloadSinkPODAdjacencySoapIn"/>
+      <output message="tns:DownloadSinkPODAdjacencySoapOut"/>
+    </operation>
+    <operation name="DownloadRRO">
+      <input message="tns:DownloadRROSoapIn"/>
+      <output message="tns:DownloadRROSoapOut"/>
+    </operation>
+    <operation name="DownloadRegistryVersion">
+      <input message="tns:DownloadRegistryVersionSoapIn"/>
+      <output message="tns:DownloadRegistryVersionSoapOut"/>
+    </operation>
+    <operation name="DownloadRC">
+      <input message="tns:DownloadRCSoapIn"/>
+      <output message="tns:DownloadRCSoapOut"/>
+    </operation>
+    <operation name="DownloadPseudoTie">
+      <input message="tns:DownloadPseudoTieSoapIn"/>
+      <output message="tns:DownloadPseudoTieSoapOut"/>
+    </operation>
+    <operation name="DownloadPSE">
+      <input message="tns:DownloadPSESoapIn"/>
+      <output message="tns:DownloadPSESoapOut"/>
+    </operation>
+    <operation name="DownloadProductType">
+      <input message="tns:DownloadProductTypeSoapIn"/>
+      <output message="tns:DownloadProductTypeSoapOut"/>
+    </operation>
+    <operation name="DownloadProduct">
+      <input message="tns:DownloadProductSoapIn"/>
+      <output message="tns:DownloadProductSoapOut"/>
+    </operation>
+    <operation name="DownloadPORPODPointType">
+      <input message="tns:DownloadPORPODPointTypeSoapIn"/>
+      <output message="tns:DownloadPORPODPointTypeSoapOut"/>
+    </operation>
+    <operation name="DownloadPORPOD">
+      <input message="tns:DownloadPORPODSoapIn"/>
+      <output message="tns:DownloadPORPODSoapOut"/>
+    </operation>
+    <operation name="DownloadPODPORAdjacency">
+      <input message="tns:DownloadPODPORAdjacencySoapIn"/>
+      <output message="tns:DownloadPODPORAdjacencySoapOut"/>
+    </operation>
+    <operation name="DownloadPKICA">
+      <input message="tns:DownloadPKICASoapIn"/>
+      <output message="tns:DownloadPKICASoapOut"/>
+    </operation>
+    <operation name="DownloadPendingEntityCodeRole">
+      <input message="tns:DownloadPendingEntityCodeRoleSoapIn"/>
+      <output message="tns:DownloadPendingEntityCodeRoleSoapOut"/>
+    </operation>
+    <operation name="DownloadPendingEntity">
+      <input message="tns:DownloadPendingEntitySoapIn"/>
+      <output message="tns:DownloadPendingEntitySoapOut"/>
+    </operation>
+    <operation name="DownloadMRDResource">
+      <input message="tns:DownloadMRDResourceSoapIn"/>
+      <output message="tns:DownloadMRDResourceSoapOut"/>
+    </operation>
+    <operation name="DownloadMRDFlowgate">
+      <input message="tns:DownloadMRDFlowgateSoapIn"/>
+      <output message="tns:DownloadMRDFlowgateSoapOut"/>
+    </operation>
+    <operation name="DownloadMO">
+      <input message="tns:DownloadMOSoapIn"/>
+      <output message="tns:DownloadMOSoapOut"/>
+    </operation>
+    <operation name="DownloadInterconnection">
+      <input message="tns:DownloadInterconnectionSoapIn"/>
+      <output message="tns:DownloadInterconnectionSoapOut"/>
+    </operation>
+    <operation name="DownloadERO">
+      <input message="tns:DownloadEROSoapIn"/>
+      <output message="tns:DownloadEROSoapOut"/>
+    </operation>
+    <operation name="DownloadEntity">
+      <input message="tns:DownloadEntitySoapIn"/>
+      <output message="tns:DownloadEntitySoapOut"/>
+    </operation>
+    <operation name="DownloadControlZone">
+      <input message="tns:DownloadControlZoneSoapIn"/>
+      <output message="tns:DownloadControlZoneSoapOut"/>
+    </operation>
+    <operation name="DownloadBAAdjacency">
+      <input message="tns:DownloadBAAdjacencySoapIn"/>
+      <output message="tns:DownloadBAAdjacencySoapOut"/>
+    </operation>
+    <operation name="DownloadBA">
+      <input message="tns:DownloadBASoapIn"/>
+      <output message="tns:DownloadBASoapOut"/>
+    </operation>
+    <operation name="DownloadASP">
+      <input message="tns:DownloadASPSoapIn"/>
+      <output message="tns:DownloadASPSoapOut"/>
+    </operation>
+    <operation name="DownloadACA">
+      <input message="tns:DownloadACASoapIn"/>
+      <output message="tns:DownloadACASoapOut"/>
+    </operation>
+  </portType>
+  <binding name="WREG_WebServicesSoap" type="tns:WREG_WebServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="DownloadTSP">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadTSP" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadTransmissionPath">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadTransmissionPath" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadSourceSinkPointType">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadSourceSinkPointType" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadSourceSink">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadSourceSink" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadSourcePORAdjacency">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadSourcePORAdjacency" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadSinkPODAdjacency">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadSinkPODAdjacency" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadRRO">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadRRO" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadRegistryVersion">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadRegistryVersion" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadRC">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadRC" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPseudoTie">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPseudoTie" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPSE">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPSE" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadProductType">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadProductType" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadProduct">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadProduct" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPORPODPointType">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPORPODPointType" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPORPOD">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPORPOD" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPODPORAdjacency">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPODPORAdjacency" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPKICA">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPKICA" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPendingEntityCodeRole">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPendingEntityCodeRole" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadPendingEntity">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadPendingEntity" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadMRDResource">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadMRDResource" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadMRDFlowgate">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadMRDFlowgate" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadMO">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadMO" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadInterconnection">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadInterconnection" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadERO">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadERO" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadEntity">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadEntity" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadControlZone">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadControlZone" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadBAAdjacency">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadBAAdjacency" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadBA">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadBA" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadASP">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadASP" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DownloadACA">
+      <soap:operation soapAction="http://www.oati.net/namespace/DownloadACA" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="WREG_WebServices">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/"/>
+    <port name="WREG_WebServicesSoap" binding="tns:WREG_WebServicesSoap">
+      <soap:address location="https://www.naesbwry.oati.com/cgi-bin/webplus.dll?script=/NAESBWRY/WREG-Web-Services-Main.wml"/>
+    </port>
+  </service>
+</definitions>

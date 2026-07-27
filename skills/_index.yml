@@ -1,0 +1,38 @@
+generated: '2026-07-27'
+method: generated
+source: >-
+  Grounded in wsdl/naesb-eir-webregistry.wsdl (real operation names, harvested live) and
+  schemas/naesb-espi_v4.xsd + schemas/naesb-customer_v4.xsd (real element names). NAESB
+  publishes no OpenAPI and no AGENTS.md or skill files of its own; a search of naesb.org
+  found none.
+note: >-
+  NAESB has no OpenAPI, so these skills are grounded in the WSDL operation set and the ESPI
+  XML schema element names instead. Every operation and element named in a skill exists
+  verbatim in the referenced artifact.
+skills:
+- file: naesb-download-eir-registry.md
+  name: Download a NAESB EIR registry publication
+  api: wsdl/naesb-eir-webregistry.wsdl
+  operations:
+  - DownloadRegistryVersion
+  - DownloadEntity
+  - DownloadBA
+  - DownloadPSE
+  - DownloadTSP
+  - DownloadPORPOD
+  - DownloadSourceSink
+  - DownloadTransmissionPath
+  - DownloadBAAdjacency
+- file: naesb-espi-green-button-authorization.md
+  name: Authorize and retrieve Green Button energy usage under NAESB ESPI
+  api: schemas/naesb-espi_v4.xsd
+  operations:
+  - ApplicationInformation
+  - Authorization
+  - UsagePoint
+  - MeterReading
+  - ReadingType
+  - IntervalBlock
+  - IntervalReading
+  - LocalTimeParameters
+  - ElectricPowerUsageSummary

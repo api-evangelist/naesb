@@ -1,0 +1,90 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  wsdl/naesb-eir-webregistry.wsdl (harvested live), a verified anonymous SOAP call to the
+  production EIR webRegistry endpoint on 2026-07-27, the OATI webRegistry Technical Guide
+  v6.1, the NAESB Authorized Certification Authority list, and the ESPI v4.0 XML schema.
+docs: https://www.naesb.org/pdf4/eir_webregistry_technical_guide_v6.1_1018.pdf
+summary:
+  types:
+  - mutualTLS
+  - oauth2
+  note: >-
+    NAESB has two entirely separate authentication stories and they must not be conflated.
+    The one API NAESB itself operates — the EIR webRegistry — is protected by mutual TLS
+    with X.509 client certificates issued by NAESB-Authorized Certification Authorities.
+    The OAuth 2.0 model below is NOT NAESB authentication: it is the authorization model
+    that the REQ.21 ESPI (Green Button) standard requires each utility Data Custodian to
+    implement at its own endpoint. NAESB authors that model; it operates no ESPI endpoint.
+  api_key_in: []
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: NAESB EIR client certificate
+  api: naesb:naesb-eir-webregistry
+  type: mutualTLS
+  transport: https
+  sources:
+  - wsdl/naesb-eir-webregistry.wsdl
+  issuer_model: >-
+    X.509 certificates issued by NAESB-Authorized Certification Authorities (ACAs) accredited
+    under NAESB WEQ-012 Public Key Infrastructure. The registry itself publishes the ACA
+    roster through the DownloadACA and DownloadPKICA operations, whose ACAStruct carries
+    PKICAName, CertificateURL and CertificateType (ROOT | INTERMEDIATE | ISSUER).
+  authorized_ca_list: https://www.naesb.org/pdf4/ac_authorities_2023.pdf
+  minimum_tls: TLSv1.2
+  minimum_tls_source: https://www.naesb.org/pdf4/registry_required_browser_settings_tls-v1.2_0320.pdf
+  additional_requirement: >-
+    A paid EIR registration and annual subscription is required in addition to the certificate.
+    The annual subscription fee rose to $275 effective 2025-10-01.
+  verified_behavior:
+    date: '2026-07-27'
+    probe: >-
+      Anonymous SOAP POST of DownloadRegistryVersion to the production endpoint, no client
+      certificate presented.
+    http_status: 200
+    response_return_code: 1
+    response_return_code_desc: FAILURE
+    response_error_code_desc: Please present a valid certificate that is associated with a NAESB EIR user
+    finding: >-
+      The service is reachable and answers anonymously with a well-formed SOAP body, but every
+      operation is refused without a registered client certificate. The WSDL itself is served
+      to anonymous callers; only the data behind it is gated.
+- name: ESPI OAuth 2.0 (authored by NAESB, implemented by each Data Custodian)
+  api: naesb:naesb-espi-green-button
+  type: oauth2
+  operated_by: each utility Data Custodian, not NAESB
+  sources:
+  - schemas/naesb-espi_v4.xsd
+  flows:
+  - flow: authorizationCode
+    note: >-
+      The v4.0 schema encodes the endpoints as data rather than fixing them, because every
+      Data Custodian runs its own authorization server. ApplicationInformation carries
+      authorizationServerUri, authorizationServerAuthorizationEndpoint,
+      authorizationServerTokenEndpoint and authorizationServerRegistrationEndpoint;
+      GrantType and TokenEndPointMethod select the flow and client authentication method.
+  schema_elements:
+  - authorizationServerUri
+  - authorizationServerAuthorizationEndpoint
+  - authorizationServerTokenEndpoint
+  - authorizationServerRegistrationEndpoint
+  - GrantType
+  - TokenEndPointMethod
+  - scope
+  - OAuthError
+  scopes_note: >-
+    The schema declares a `scope` element and an Authorization resource, but the scope
+    string grammar and its permitted values live in the copyright-protected REQ.21 Model
+    Business Practices narrative, which NAESB paywalls. No scope vocabulary is published
+    openly, so no scopes/ artifact is emitted for this provider rather than guessing one.
+unauthenticated_surface:
+- surface: WSDL retrieval
+  url: https://www.naesbwry.oati.com/cgi-bin/webplus.dll?Script=/naesbwry/WREG-Web-Services-Main.wml
+  note: The full 30-operation WSDL is served without any credential.
+- surface: ESPI XML schema download
+  url: https://www.naesb.org/ESPI_Standards.asp
+  note: >-
+    The four ESPI XSDs are downloadable anonymously after a one-click terms-of-use
+    acknowledgement, released under Apache License 2.0 as a documented one-time exception
+    to the NAESB Copyright Policy.

@@ -42,7 +42,7 @@ accessModel:
   - https://www.naesb.org/pdf4/eir_webregistry_technical_guide_v6.1_1018.pdf
   generated: '2026-07-27'
   method: manual
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+image: https://www.naesb.org/images/naesb-logo.jpg
 tags:
 - Energy
 - United States
@@ -57,6 +57,17 @@ tags:
 created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.19'
+enrichment:
+  round: '2026-07-27'
+  note: >-
+    Contract discovery upgraded this repo. The prior round recorded that the EIR webRegistry
+    endpoint could not complete a TLS handshake anonymously. That was a trust-chain failure,
+    not a handshake failure: the server certificate is issued by OATI's private webCARES
+    Server Issuing CA and does not chain to a public root. Once that is accounted for, the
+    host answers, the full 30-operation WSDL is served to anonymous callers, and the service
+    returns a well-formed SOAP refusal ("Please present a valid certificate that is
+    associated with a NAESB EIR user") rather than nothing at all. The WSDL is now harvested
+    verbatim and is this provider's real machine-readable contract.
 apis:
 - aid: naesb:naesb-espi-green-button
   name: NAESB REQ.21 Energy Services Provider Interface (ESPI)
@@ -98,6 +109,9 @@ apis:
     url: https://www.naesb.org//misc/naesb_matl_order_espi_standards.pdf
   - type: TermsOfService
     url: https://www.naesb.org/copyright.asp
+  - type: AgentSkill
+    name: Authorize and retrieve Green Button energy usage under NAESB ESPI
+    url: skills/naesb-espi-green-button-authorization.md
 - aid: naesb:naesb-eir-webregistry
   name: NAESB Electric Industry Registry (EIR) webRegistry Web Services
   description: >-
@@ -110,10 +124,14 @@ apis:
     per section 2.5 of that guide no request is processed unless it carries a digitally signed
     certificate associated with a registered webRegistry user; those certificates are issued
     by NAESB-Authorized Certification Authorities. Access also requires a paid registry
-    subscription. An anonymous probe of the production endpoint on 2026-07-27 failed at the
-    TLS layer (curl exit 60, "unable to get local issuer certificate") because the server
-    certificate does not chain to a public root — the API cannot be reached at all without the
-    registry PKI.
+    subscription. The full WSDL — one service, one portType and thirty Download* operations
+    over thirty entity structs — IS served to anonymous callers and is harvested here
+    verbatim. Two things complicate reaching it: the server certificate is issued by OATI's
+    private "webCARES Server Issuing CA 2025" and does not chain to a public root, so default
+    trust stores fail verification (curl exit 60); and once that is accounted for, an
+    anonymous SOAP call returns HTTP 200 with ReturnCode 1 / FAILURE and the message "Please
+    present a valid certificate that is associated with a NAESB EIR user". The contract is
+    public; the data behind it is not.
   humanURL: https://www.naesb.org/weq/weq_eir.asp
   baseURL: https://www.naesbwry.oati.com/cgi-bin/webplus.dll?Script=/naesbwry/WREG-Web-Services-Main.wml
   tags:
@@ -127,6 +145,8 @@ apis:
     url: https://www.naesb.org/weq/weq_eir.asp
   - type: TechnicalGuide
     url: https://www.naesb.org/pdf4/eir_webregistry_technical_guide_v6.1_1018.pdf
+  - type: APIReference
+    url: https://www.naesb.org/pdf4/eir_webregistry_technical_guide_v6.1_1018.pdf
   - type: UserGuide
     url: https://www.naesb.org/pdf4/eir_webregistry_user_guide_v5.0_1023.pdf
   - type: GettingStarted
@@ -137,7 +157,18 @@ apis:
     url: https://www.naesb.org/pdf4/naesb_eir_subscription_fee010715.docx
   - type: Authentication
     url: https://www.naesb.org/pdf4/ac_authorities_2023.pdf
+  - type: WSDL
+    url: wsdl/naesb-eir-webregistry.wsdl
+  - type: ChangeLog
+    url: https://www.naesb.org/weq/weq_eir.asp
+  - type: Roadmap
+    url: https://www.naesb.org/weq/weq_eir_requests.asp
+  - type: AgentSkill
+    name: Download a NAESB EIR registry publication
+    url: skills/naesb-download-eir-registry.md
 common:
+- type: DomainSecurity
+  url: security/naesb-domain-security.yml
 - type: Website
   url: https://www.naesb.org/
 - type: About
@@ -170,6 +201,28 @@ common:
   url: https://www.naesb.org/news.asp
 - type: WhitePapers
   url: https://www.naesb.org/white_papers.asp
+- type: Support
+  url: https://www.naesb.org/contactus.asp
+- type: Compliance
+  url: https://www.naesb.org/materials/certification.asp
+- type: Authentication
+  url: authentication/naesb-authentication.yml
+- type: Conventions
+  url: conventions/naesb-conventions.yml
+- type: ErrorCatalog
+  url: errors/naesb-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/naesb-lifecycle.yml
+- type: ChangeLog
+  url: changelog/naesb-changelog.yml
+- type: Conformance
+  url: conformance/naesb-conformance.yml
+- type: DataModel
+  url: data-model/naesb-data-model.yml
+- type: LLMsTxt
+  url: llms/naesb-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

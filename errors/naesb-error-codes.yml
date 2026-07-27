@@ -1,0 +1,73 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  wsdl/naesb-eir-webregistry.wsdl (OutputStruct / ErrorStruct definitions) and a verified
+  anonymous SOAP call to the production EIR webRegistry endpoint on 2026-07-27.
+format: soap-outputstruct
+api: naesb:naesb-eir-webregistry
+summary: >-
+  The EIR webRegistry does not use HTTP status codes to signal application errors. Every
+  Download* operation returns HTTP 200 with a SOAP body containing an OutputStruct whose
+  ReturnCode carries the outcome; failures populate an Error element with one or more
+  ErrorStruct entries. Transport-level and schema-validation problems are the exception —
+  those surface as a genuine SOAP 1.1 soap:Fault with HTTP 500.
+envelope:
+  container: OutputStruct
+  namespace: http://www.oati.net/namespace/Registry/WREG_WebServices
+  fields:
+  - name: ReturnCode
+    type: PositiveInteger
+    required: true
+    note: Outcome discriminator. Observed value 1 = FAILURE on an unauthenticated call.
+  - name: ReturnCodeDesc
+    type: string
+    required: true
+    note: Human-readable outcome. Observed value "FAILURE".
+  - name: Error
+    type: Error
+    required: false
+    note: Present on failure; contains 1..n ErrorStruct.
+  - name: Success
+    type: Success
+    required: false
+    note: Present on success; contains the requested *Struct payload rows.
+  error_item: ErrorStruct
+  error_item_fields:
+  - name: ErrorCode
+    type: PositiveInteger
+  - name: ErrorCodeDesc
+    type: string
+  - name: ParentElementIndex
+    type: string
+    required: false
+    note: Points at the offending element when the error is attributable to one input row.
+observed_errors:
+- return_code: 1
+  return_code_desc: FAILURE
+  error_code: 0
+  error_code_desc: Please present a valid certificate that is associated with a NAESB EIR user
+  cause: >-
+    No X.509 client certificate was presented, or the certificate is not associated with a
+    registered NAESB EIR user.
+  remediation: >-
+    Obtain a certificate from a NAESB-Authorized Certification Authority, register it against
+    an EIR user, and maintain a current paid annual subscription.
+  http_status: 200
+  verified: '2026-07-27'
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadRegistryVersion
+soap_faults:
+- faultcode: soap:Server
+  faultstring_pattern: 'Document contains an element <{Name}> that is not defined in the schema.'
+  cause: >-
+    The request body element is not declared in the service schema — most often the wrong XML
+    namespace. Request elements belong to http://www.oati.net/namespace, NOT to the inner
+    types namespace http://www.oati.net/namespace/Registry/WREG_WebServices.
+  remediation: >-
+    Emit the operation element in http://www.oati.net/namespace and set SOAPAction to
+    http://www.oati.net/namespace/{OperationName}.
+  http_status: 500
+  verified: '2026-07-27'
+coverage_note: >-
+  NAESB and OATI publish no open enumeration of ErrorCode values; the full list, if one exists,
+  lives in the OATI webRegistry Technical Guide and behind the registry subscription. Only
+  codes observed on the live endpoint are recorded here. No error codes have been invented.

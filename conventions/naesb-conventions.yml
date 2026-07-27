@@ -1,0 +1,116 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  wsdl/naesb-eir-webregistry.wsdl, schemas/naesb-espi_v4.xsd, schemas/naesb-customer_v4.xsd,
+  and the EIR guidance documents linked from https://www.naesb.org/weq/weq_eir.asp
+summary: >-
+  Cross-cutting request/response semantics for the one API NAESB operates (the EIR
+  webRegistry SOAP service) and, separately, for the ESPI data exchange NAESB specifies but
+  does not host. These are two different contracts with almost nothing in common.
+apis:
+- api: naesb:naesb-eir-webregistry
+  style: SOAP 1.1, document/literal
+  transport: HTTPS only, TLS 1.2 minimum
+  endpoint: https://www.naesbwry.oati.com/cgi-bin/webplus.dll?script=/NAESBWRY/WREG-Web-Services-Main.wml
+  wsdl: wsdl/naesb-eir-webregistry.wsdl
+  content_type: text/xml; charset=utf-8
+  dispatch:
+    mechanism: SOAPAction header plus body element name
+    soap_action_pattern: http://www.oati.net/namespace/{OperationName}
+    request_namespace: http://www.oati.net/namespace
+    types_namespace: http://www.oati.net/namespace/Registry/WREG_WebServices
+  authentication:
+    style: mutual TLS with an X.509 client certificate from a NAESB-Authorized CA
+    detail: authentication/naesb-authentication.yml
+  operation_shape:
+    verbs: read-only; all 30 operations are Download* queries, there is no write surface
+    common_parameters:
+    - name: EffectiveDate
+      type: EffectiveDate
+      required: false
+      note: >-
+        Point-in-time selector. The registry is effective-dated end to end — nearly every
+        struct carries StartEffectiveDate and StopEffectiveDate, so a download is a snapshot
+        as of a date rather than a live-only view.
+    - name: Version
+      type: string
+      required: false
+      note: >-
+        Registry publication version selector, correlated with DownloadRegistryVersion
+        (VersionCode, EffectiveDate, PublicationMethodCode, PublicationStatus, PublicationDT).
+    response_shape: OutputStruct with ReturnCode, ReturnCodeDesc, and either Error or Success
+  pagination:
+    supported: false
+    note: >-
+      No paging parameters exist. Each Download* operation returns the full result set for the
+      requested effective date and version as an unbounded sequence of *Struct elements.
+  filtering:
+    supported: partial
+    note: Only by EffectiveDate and Version; there are no per-field query filters.
+  idempotency:
+    key_header: null
+    supported: false
+    note: >-
+      There is no idempotency-key contract, and none is needed: the entire surface is
+      read-only Download* queries which are inherently safe to repeat. No Idempotency
+      pointer is emitted for this provider because no idempotency mechanism is published.
+  versioning:
+    api_version:
+      scheme: none-in-transport
+      note: >-
+        The WSDL and the endpoint URL carry no version segment. The Technical Guide is
+        separately versioned (v6.1, October 2018).
+    data_version:
+      scheme: registry publication version
+      operation: DownloadRegistryVersion
+      fields:
+      - VersionID
+      - VersionCode
+      - EffectiveDate
+      - PublicationMethodCode
+      - PublicationStatus
+      - PublicationDT
+      publication_method_values:
+      - U
+      - S
+      publication_status_values:
+      - ARCHIVE
+      - ACTIVE
+      - PENDING
+      - FUTURE
+      note: >-
+        This is the real versioning contract: consumers pin to a published registry version
+        and can see ARCHIVE / ACTIVE / PENDING / FUTURE publications.
+  error_envelope:
+    shape: OutputStruct.Error[].ErrorStruct
+    detail: errors/naesb-error-codes.yml
+    http_semantics: >-
+      Application errors return HTTP 200 with ReturnCode 1 (FAILURE). Only schema/transport
+      problems return HTTP 500 with a soap:Fault.
+  request_tracing:
+    header: null
+    note: No request-id or correlation header is defined. Support is by phone to the OATI Help Desk (763-201-2020).
+  rate_limiting:
+    documented: false
+    note: No rate limit, quota or throttling signal is documented or advertised.
+  change_notification:
+    mechanism: dated email announcements to WEQ members and EIR users, mirrored on the EIR page
+    url: https://www.naesb.org/weq/weq_eir.asp
+    detail: changelog/naesb-changelog.yml
+- api: naesb:naesb-espi-green-button
+  style: RESTful Atom/XML resource exchange, specified by NAESB and implemented per utility
+  operated_by: each Data Custodian utility; NAESB hosts no endpoint
+  content_type: application/atom+xml
+  authorization:
+    style: OAuth 2.0 authorization code, endpoints discovered from ApplicationInformation
+    detail: authentication/naesb-authentication.yml
+  resource_model: data-model/naesb-data-model.yml
+  batching:
+    supported: true
+    note: The schema defines BatchList and BatchItemInfo for bulk delivery of subscription data.
+  time_semantics:
+    note: >-
+      LocalTimeParameters carries dstStartRule, dstEndRule, dstOffset and tzOffset so interval
+      data can be interpreted against the service location's local time.
+  error_envelope:
+    shape: OAuthError element in ApplicationInformation, plus the standard OAuth 2.0 error responses

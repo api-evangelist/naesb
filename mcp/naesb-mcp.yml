@@ -1,0 +1,173 @@
+generated: '2026-07-27'
+method: derived
+source: wsdl/naesb-eir-webregistry.wsdl
+status: candidate
+summary: No official hosted or remote Model Context Protocol (MCP) server was found for NAESB, and none
+  is advertised on naesb.org or by OATI, the registry administrator. The candidate tool set below is DERIVED
+  one-to-one from the 30 operations in the EIR webRegistry WSDL as a proposal for an agent-facing surface.
+  It is not published by NAESB. Every tool is read-only, and every tool would require the caller to hold
+  an X.509 client certificate issued by a NAESB-Authorized Certification Authority plus a paid EIR subscription,
+  so an unattended agent cannot use this surface without provisioned registry credentials.
+server: null
+transport: null
+auth:
+  type: mutualTLS
+  detail: authentication/naesb-authentication.yml
+input_schema_note: All 30 operations share the same two optional inputs, EffectiveDate and Version, as
+  defined in the WSDL. There are no per-operation parameters.
+candidate_tools:
+- name: download_tsp
+  maps_to: SOAP DownloadTSP
+  description: Download registered Transmission Service Providers.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadTSP
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_transmission_path
+  maps_to: SOAP DownloadTransmissionPath
+  description: Download registered POR-to-POD transmission paths.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadTransmissionPath
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_source_sink_point_type
+  maps_to: SOAP DownloadSourceSinkPointType
+  description: Download the point-type vocabulary used by source and sink points.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadSourceSinkPointType
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_source_sink
+  maps_to: SOAP DownloadSourceSink
+  description: Download generation source and load sink points with BA, PSE, control zone and MRD resource
+    references.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadSourceSink
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_sourcepor_adjacency
+  maps_to: SOAP DownloadSourcePORAdjacency
+  description: Download source-to-POR adjacency edges.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadSourcePORAdjacency
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_sinkpod_adjacency
+  maps_to: SOAP DownloadSinkPODAdjacency
+  description: Download sink-to-POD adjacency edges.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadSinkPODAdjacency
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_rro
+  maps_to: SOAP DownloadRRO
+  description: Download registered Regional Reliability Organizations.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadRRO
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_registry_version
+  maps_to: SOAP DownloadRegistryVersion
+  description: Download registry publication versions with effective date, publication method and status
+    (ARCHIVE, ACTIVE, PENDING, FUTURE).
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadRegistryVersion
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_rc
+  maps_to: SOAP DownloadRC
+  description: Download registered Reliability Coordinators.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadRC
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_pseudo_tie
+  maps_to: SOAP DownloadPseudoTie
+  description: Download pseudo-tie registrations and their ordered segments.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPseudoTie
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_pse
+  maps_to: SOAP DownloadPSE
+  description: Download registered Purchasing-Selling Entities with PSE type and reliability region.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPSE
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_product_type
+  maps_to: SOAP DownloadProductType
+  description: Download the transmission product-type vocabulary.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadProductType
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_product
+  maps_to: SOAP DownloadProduct
+  description: Download transmission products and their product type.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadProduct
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_porpod_point_type
+  maps_to: SOAP DownloadPORPODPointType
+  description: Download the point-type vocabulary used by POR/POD points.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPORPODPointType
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_porpod
+  maps_to: SOAP DownloadPORPOD
+  description: Download points of receipt and points of delivery with their TSP and BA.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPORPOD
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_podpor_adjacency
+  maps_to: SOAP DownloadPODPORAdjacency
+  description: Download TSP-to-TSP adjacency edges across a POD/POR seam.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPODPORAdjacency
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_pkica
+  maps_to: SOAP DownloadPKICA
+  description: Download the roster of NAESB-Authorized Certification Authorities.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPKICA
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_pending_entity_code_role
+  maps_to: SOAP DownloadPendingEntityCodeRole
+  description: Download entity code/role assignments awaiting approval.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPendingEntityCodeRole
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_pending_entity
+  maps_to: SOAP DownloadPendingEntity
+  description: Download entity registrations awaiting approval.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadPendingEntity
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_mrd_resource
+  maps_to: SOAP DownloadMRDResource
+  description: Download Market Redispatch resources.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadMRDResource
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_mrd_flowgate
+  maps_to: SOAP DownloadMRDFlowgate
+  description: Download Market Redispatch flowgates.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadMRDFlowgate
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_mo
+  maps_to: SOAP DownloadMO
+  description: Download registered Market Operators.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadMO
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_interconnection
+  maps_to: SOAP DownloadInterconnection
+  description: Download the interconnection reference list.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadInterconnection
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_ero
+  maps_to: SOAP DownloadERO
+  description: Download the registered Electric Reliability Organization records.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadERO
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_entity
+  maps_to: SOAP DownloadEntity
+  description: Download the registry of market participant entities (ID, NERC ID, DUNS, names, coded roles,
+    addresses and contacts).
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadEntity
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_control_zone
+  maps_to: SOAP DownloadControlZone
+  description: Download control zones and the Balancing Authority each belongs to.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadControlZone
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_ba_adjacency
+  maps_to: SOAP DownloadBAAdjacency
+  description: Download Balancing Authority to Balancing Authority adjacency edges.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadBAAdjacency
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_ba
+  maps_to: SOAP DownloadBA
+  description: Download registered Balancing Authorities with reliability area, region, market area and
+    interconnection.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadBA
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_asp
+  maps_to: SOAP DownloadASP
+  description: Download registered Agent Service Providers.
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadASP
+  input_schema_source: EffectiveDate (optional), Version (optional)
+- name: download_aca
+  maps_to: SOAP DownloadACA
+  description: Download the individual certificates published by Authorized Certification Authorities,
+    including CertificateURL and CertificateType (ROOT, INTERMEDIATE, ISSUER).
+  source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadACA
+  input_schema_source: EffectiveDate (optional), Version (optional)

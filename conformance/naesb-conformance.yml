@@ -1,0 +1,111 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  wsdl/naesb-eir-webregistry.wsdl, schemas/naesb-espi_v4.xsd, schemas/naesb-customer_v4.xsd,
+  plus the NAESB certification programme and EIR guidance pages.
+summary: >-
+  NAESB is itself a standards development organization, so this artifact records two things:
+  which cross-cutting technical standards its own machine-readable artifacts conform to, and
+  the fact that NAESB operates a published, voluntary certification programme against the
+  standards it authors. It records no security-audit posture (no SOC 2, ISO 27001, PCI DSS,
+  HIPAA or FedRAMP claim is published anywhere on naesb.org) and no bug-bounty or vulnerability
+  disclosure programme was found.
+standards:
+- id: soap-1.1
+  conforms: true
+  evidence: >-
+    wsdl/naesb-eir-webregistry.wsdl binds every operation with
+    http://schemas.xmlsoap.org/wsdl/soap/ style="document" use="literal"; the live endpoint
+    returns soap:Envelope / soap:Fault bodies.
+- id: wsdl-1.1
+  conforms: true
+  evidence: >-
+    definitions element in the http://schemas.xmlsoap.org/wsdl/ namespace with one portType
+    (WREG_WebServicesSoap), one binding and one service (WREG_WebServices) carrying 30 operations.
+- id: xml-schema-1.0
+  conforms: true
+  evidence: >-
+    Inline xs:schema types in the WSDL, and the four standalone ESPI XSDs in schemas/
+    (targetNamespace http://naesb.org/espi and http://naesb.org/espi/customer).
+- id: atom-rfc4287
+  conforms: true
+  evidence: >-
+    REQ.21 ESPI carries its payloads as Atom entries; the ESPI schema defines the resource
+    types (UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary)
+    that populate an Atom feed at the Data Custodian.
+- id: oauth2-rfc6749
+  conforms: true
+  scope_of_claim: standard authored, not operated
+  evidence: >-
+    schemas/naesb-espi_v4.xsd ApplicationInformation encodes authorizationServerUri,
+    authorizationServerAuthorizationEndpoint, authorizationServerTokenEndpoint,
+    authorizationServerRegistrationEndpoint, GrantType, TokenEndPointMethod, scope and
+    OAuthError. NAESB specifies this model for Data Custodians; NAESB runs no
+    authorization server of its own.
+- id: oauth2-dynamic-client-registration-rfc7591
+  conforms: true
+  scope_of_claim: standard authored, not operated
+  evidence: ApplicationInformation carries authorizationServerRegistrationEndpoint.
+- id: x509-pki
+  conforms: true
+  evidence: >-
+    NAESB WEQ-012 Public Key Infrastructure Business Practice Standards; the EIR requires a
+    digitally signed X.509 client certificate from a NAESB-Authorized Certification Authority,
+    and the registry publishes the ACA roster via DownloadACA / DownloadPKICA with
+    CertificateType ROOT | INTERMEDIATE | ISSUER.
+- id: tls-1.2
+  conforms: true
+  evidence: >-
+    "Registry Required Browser Settings - TLS Version 1.2" (March 2020),
+    https://www.naesb.org/pdf4/registry_required_browser_settings_tls-v1.2_0320.pdf.
+    Live probe of www.naesb.org negotiated TLSv1.2.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger document is published; probed on both hosts, all 404.
+- id: graphql
+  conforms: false
+  evidence: No GraphQL surface exists.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    Not applicable. Neither the EIR webRegistry nor ESPI defines a webhook, streaming or
+    event-delivery surface operated by NAESB; EIR change notice is delivered by email
+    announcement, not by callback.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are carried in the SOAP OutputStruct/ErrorStruct envelope, not as
+    application/problem+json.
+- id: rest
+  conforms: false
+  evidence: The only NAESB-operated API is document/literal SOAP over a CGI endpoint.
+certification_programme:
+  published: true
+  url: https://www.naesb.org/materials/certification.asp
+  name: NAESB Certification Program for Standards
+  model: self-certification under oath by an officer or principal, modeled on Sarbanes-Oxley
+  independent_review: optional; independent certifiers are listed but not required
+  validity: two years, after which re-certification is required
+  applies_to:
+  - WEQ OASIS Standards & Communication Protocols v1.0, v2.0, v2.1, v2.2
+  - WGQ Version 4.0, 3.2, 3.1, 3.0, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4
+  - Energy Efficiency Measurement & Verification products and services
+  does_not_cover: >-
+    Green Button / ESPI implementations are NOT certified by NAESB; that is done by the
+    Green Button Alliance under a separate collaborative arrangement.
+  certified_products_directory: https://www.naesb.org/pdf2/cert_products.pdf
+  warranty_disclaimer: >-
+    NAESB explicitly does not warrant or guarantee that certified products comply with its
+    standards, perform as intended, or match vendor representations.
+security_certifications:
+  published: false
+  searched:
+  - SOC 2
+  - ISO 27001
+  - PCI DSS
+  - HIPAA
+  - FedRAMP
+  - CSA STAR
+  finding: >-
+    None published. Probes for a trust centre (trust.naesb.org, /trust, /security,
+    /compliance) and for a vulnerability disclosure programme returned nothing.
