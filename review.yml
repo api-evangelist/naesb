@@ -1,0 +1,428 @@
+aid: naesb
+name: NAESB
+review:
+  question: >-
+    Does the North American Energy Standards Board publish a genuine public API or
+    machine-readable specification surface, and how much of the Green Button / ESPI
+    standard it authors is actually free and public?
+  answer: partial
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  tier: industry-body-standards
+  homeMarket: United States
+  summary: >-
+    NAESB is a standards development organization, not a service operator. It publishes one
+    genuinely open machine-readable artifact — the REQ.21 ESPI (Green Button) XML schemas
+    under Apache 2.0 — and operates exactly one real API, the EIR webRegistry SOAP service,
+    which is completely closed behind a paid subscription and an accredited-CA client
+    certificate. The narrative standards themselves are paywalled. There is no consumer data
+    API and no open market data.
+
+mandate:
+  regime: green-button-voluntary
+  status: not-applicable
+  verbatim: >-
+    NAESB is the AUTHOR of the Green Button standard, not a party subject to a data mandate.
+    No federal US obligation compels any utility to implement Green Button, and no
+    consumer-data obligation applies to NAESB itself because NAESB holds no customer data.
+    The ESPI standards page states plainly that "The Green Button Initiative was launched in
+    2011 by the White House Office of Science and Technology Policy" and that "The utility
+    industry responded" — an initiative and an industry response, not a mandate. The regime
+    in play around this organization is therefore green-button-voluntary; the organization's
+    own implementation status is not-applicable.
+  isDataHolder: false
+  authorsStandard: true
+  claimVsImplementation: >-
+    NAESB makes no compliance claim about itself. It does state, on
+    https://www.naesb.org/ESPI_Standards.asp, that "energy usage data is now made available
+    through the Green Button to 60 million U.S. households, altogether 100 million people, and
+    nearly 3 million customers in Canada." That is an industry adoption claim published by the
+    standards body about third parties. It is NOT verified here and is NOT an implementation
+    by NAESB. Per-utility Green Button implementation must be verified utility by utility, at
+    the utility's own endpoint. NAESB itself operates no ESPI endpoint.
+  certificationIsNotImplementation: >-
+    NAESB runs certification programmes but does NOT certify Green Button / ESPI
+    implementations — that is done by the Green Button Alliance under a separate collaborative
+    arrangement. NAESB's own public certified-products directory
+    (https://www.naesb.org/pdf2/cert_products.pdf, updated January 2026) lists ZERO certified
+    products under "WEQ OASIS SC&P Certified" and exactly three under "WGQ Version 4.0
+    Certified": Emerson O2CManager Software for Gas Pipelines v8.0 (certified 2025-01-30,
+    expires 2027-01-30), Quorum Software myQuorum Pipeline (CAW) and IPWS (certified
+    2025-10-09, expires 2027-10-09), and Enercross LLC NatGasHub.com (certified 2025-10-06,
+    expires 2027-10-06). A registry of three certified gas products is the full extent of the
+    publicly verifiable certification directory.
+
+dataStandard:
+  primary: NAESB REQ.21 Energy Services Provider Interface (ESPI) v4.0 — the Green Button standard
+  publisherRole: NAESB is the publisher/author of this standard, not an implementer of it.
+  versionsHarvested:
+  - version: 3.3.20200320
+    file: schemas/naesb-espi.xsd
+    targetNamespace: http://naesb.org/espi
+    note: >-
+      REQ.21 ESPI Model Business Practices, Retail Markets Quadrant (RMQ), Version 3.3
+      published January 30, 2020, MC20001 applied effective March 20, 2020.
+  - version: 3.3.20200130
+    file: schemas/naesb-customer.xsd
+    targetNamespace: http://naesb.org/espi/customer
+  - version: 4.0.20231213
+    file: schemas/naesb-espi_v4.xsd
+    targetNamespace: http://naesb.org/espi
+    note: Version 4.0, published December 2023. Current version.
+  - version: 4.0.20231213
+    file: schemas/naesb-customer_v4.xsd
+    targetNamespace: http://naesb.org/espi/customer
+  otherStandardsPublished:
+  - NAESB WEQ — Wholesale Electric Quadrant Business Practice Standards (includes OASIS
+    Standards & Communication Protocols, WEQ-012 Public Key Infrastructure, WEQ-013 EIR
+    webRegistry)
+  - NAESB REQ / RMQ — Retail Electric Quadrant (includes REQ.21 ESPI)
+  - NAESB WGQ — Wholesale Gas Quadrant Business Practice Standards (Version 4.0 current for
+    certification)
+  - NAESB RGQ — Retail Gas Quadrant Business Practice Standards
+  - NAESB model contracts, e.g. Base Contract for Sale and Purchase of Natural Gas 6.3.1 and
+    the Base Contract for Sale and Purchase of Hydrogen 6.3.6 (dated November 24, 2025)
+  standardsFreelyDownloadable: false
+  schemasFreelyDownloadable: true
+  schemaLicence: >-
+    Apache License, Version 2.0. Stated verbatim on the ESPI page: "the NAESB Board of
+    Directors have provided a one-time exception to the NAESB Copyright Policy for the schemas
+    contained within the copyright protected ESPI Model Business Practices to the industry
+    under the Apache 2.0 license." The terms-of-use interstitial repeats it: "This license
+    does not attach to the entire ESPI Model Business Practices themselves, only the schemas
+    contained therein." The Apache 2.0 header is present inside each harvested .xsd file.
+
+consumerVsMarketData:
+  consumer_data_api: false
+  consumer_data_note: >-
+    NAESB exposes no API through which a third party can obtain any individual customer's
+    usage or billing data. It defines the protocol by which utilities do that (Data Custodian
+    → Third Party, with Retail Customer authorization) but holds no customer data itself. Any
+    real ESPI/Green Button consumer data API is hosted by the individual utility, not by NAESB.
+  market_data_open: false
+  market_data_note: >-
+    NAESB publishes no open grid, market or system data feed of its own. The one data asset it
+    controls — the Electric Industry Registry, the central repository for electronic tagging
+    information used by the wholesale electric market — is subscription- and certificate-gated
+    with no anonymous access whatsoever. The only artifacts anyone can retrieve anonymously
+    are the four Apache-2.0 ESPI XML schemas and a handful of PDF directories (certified
+    products, Authorized Certification Authorities, membership statistics). Those are
+    specifications and registries of vendors, not market data.
+  theSplit: >-
+    The finding for this organization is not an open/closed split across two data speeds — it
+    is closed on both. The real split is between the SCHEMA and the STANDARD: NAESB gave away
+    the machine-readable XSDs under Apache 2.0 so that Green Button tooling could exist, while
+    keeping the human-readable Model Business Practices that explain how to use them behind an
+    $8,000/year membership or a $250 per-document purchase. You can parse a Green Button file
+    for free; you cannot read the rules for free.
+
+accessGate:
+  gate: accredited-only
+  gated: true
+  whatADeveloperMustDo:
+    forTheEspiSchemas: >-
+      Nothing but click. Visit https://www.naesb.org/ESPI_Standards.asp, follow one of the
+      four schema links to
+      https://www.naesb.org/termsofuse_form.asp?doc={espi|customer|espi_v4|customer_v4}.xsd,
+      and click a single "I Agree" button (the form has exactly one input, a submit button —
+      no name, email, or registration field). That posts to
+      https://www.naesb.org/termsofuse_send.asp?doc=... which returns the raw XSD as
+      Content-Type text/xml. Verified anonymously on 2026-07-27, all four returned HTTP 200.
+    forTheStandardsThemselves: >-
+      Pay. Per https://www.naesb.org/ESPI_Standards.asp and the Materials Order Form: NAESB
+      membership is $8,000/year (members download everything free); an individual version of
+      one quadrant's full standards set is $2,000 (USB, mail order only); an individual
+      standard, final action, or manual is $250 (e-mail delivery only). A free non-member
+      evaluation waiver exists but is severely limited — per
+      https://www.naesb.org//misc/NAESB_Nonmember_Evaluation.pdf it "extends for three
+      business days", "cannot be repeated for a given company and requested set of standards",
+      is "granted for evaluation or commenting purposes only", is delivered through a
+      LockLizard DRM secure viewer, and "the access is restricted to viewing – it does not
+      extend to printing or copying". It requires contacting the NAESB office by phone or
+      e-mail; there is no self-serve route.
+    forTheEirWebRegistryApi: >-
+      Three things, in order. (1) Register as an EIR user and pay the registry subscription —
+      per https://www.naesb.org/pdf4/naesb_eir_subscription_fee010715.docx the initial
+      registration subscription fee is $300 and the yearly renewal is $200 (2015 notice, most
+      recent published fee schedule found). (2) Obtain a digital certificate from one of the
+      NAESB Independent Authorized Certification Authorities listed at
+      https://www.naesb.org/pdf4/ac_authorities_2023.pdf — currently OATI, Systrends, GMO
+      GlobalSign Inc. and SSL Corp. d/b/a SSL.com. (3) Have that certificate associated with
+      your webRegistry user. There is no signup form, no API key, no sandbox and no
+      self-serve tier.
+  noDeveloperPortal: >-
+    There is no developer portal in the conventional sense. The closest public, anonymous,
+    machine-readable surface is the ESPI standards page.
+
+authModel:
+  eirWebRegistry:
+    scheme: mTLS / X.509 client certificate issued by an NAESB-Authorized Certification Authority
+    protocol: SOAP 1.1 over HTTPS only
+    verbatimFromTechnicalGuide: >-
+      Section 2.5 Security of the OATI webRegistry Technical Guide v6.1: "the web service
+      location is hosted on a secure server and only HTTPS protocol will be allowed. Second,
+      before any action is taken on any web service request, a digitally signed certificate
+      that has been successfully associated with a webRegistry User must be provided. Only
+      requests accompanied with the appropriate certificate will be processed."
+    wsdl: >-
+      Section 2.2 Location states "The same URL can be accessed to get the WSDL content, by
+      submitting a regular HTTP GET request." That WSDL could NOT be retrieved anonymously —
+      see the probe result below. No WSDL is stored in this repo because none was obtained.
+    accreditationLayer: >-
+      NAESB runs a Certification Program for Accredited Certification Authorities; the ACA
+      directory is public at https://www.naesb.org/pdf4/ac_authorities_2023.pdf and lists four
+      ACAs (OATI, Systrends, GMO GlobalSign Inc., SSL Corp. d/b/a SSL.com) as of the March 2026
+      supporting-document updates recorded in that PDF.
+  espiStandard:
+    scheme: OAuth 2.0, encoded directly into the published XML schema
+    evidence: >-
+      Harvested from schemas/naesb-espi_v4.xsd itself (not from marketing copy). The
+      ApplicationInformation and Authorization types declare
+      authorizationServerAuthorizationEndpoint, authorizationServerTokenEndpoint,
+      authorizationServerRegistrationEndpoint, authorizationServerUri, authorizationURI,
+      authorizedPeriod, dataCustodianScopeSelectionScreenURI, thirdPartyScopeSelectionScreenURI,
+      scope, GrantType, TokenType, TokenEndPointMethod, AuthorizationStatus and OAuthError.
+      The presence of a registration endpoint indicates dynamic client registration is part of
+      the model. Actual scope VALUES are utility-specific and are not enumerated in the schema,
+      so none are recorded here.
+    note: >-
+      NAESB does not operate an authorization server. This is the auth model the standard
+      REQUIRES of implementing Data Custodians. No NAESB OAuth or OpenID Connect endpoint
+      exists.
+  naesbOrgItself:
+    scheme: none
+    note: >-
+      https://www.naesb.org/.well-known/openid-configuration returned HTTP 404 on 2026-07-27.
+      No OpenID Connect discovery document, no security.txt, no robots.txt, no sitemap.xml.
+
+probes:
+  date: '2026-07-27'
+  method: anonymous curl, no credentials, no cookies
+  results:
+  - url: https://www.naesb.org/
+    status: 200
+    note: Live. Classic ASP site. Four quadrant navigation, Order Materials, NAESB Tools, EIR.
+  - url: https://naesb.org/
+    status: 200
+  - url: https://www.naesb.org/ESPI_Standards.asp
+    status: 200
+    note: The REQ.21 ESPI information page. Source of every schema link, licence statement and price.
+  - url: https://www.naesb.org/espi_standards.asp
+    status: 200
+    note: Same page, lowercase alias.
+  - url: https://www.naesb.org/naesb_tools.asp
+    status: 200
+    note: '"NAESB Tools" lists exactly two things: the WEQ Electric Industry Registry and REQ.21 ESPI.'
+  - url: https://www.naesb.org/weq/weq_eir.asp
+    status: 200
+    note: EIR page. Links the webRegistry Technical Guide, User Guide, Quick Start Guide, ACA renewal notices and subscription fee notice.
+  - url: https://www.naesb.org/materials/certification.asp
+    status: 200
+    note: Five certification programmes; two have public directories.
+  - url: https://www.naesb.org/membership.asp
+    status: 200
+    note: Links application PDFs; dues figure ($8,000/year) appears on the ESPI page, not here.
+  - url: https://www.naesb.org/copyright.asp
+    status: 200
+  - url: https://www.naesb.org/termsofuse_form.asp?doc=espi.xsd
+    status: 200
+    note: Terms-of-use interstitial. Single form input — an "I Agree" submit button. No registration.
+  - url: https://www.naesb.org/termsofuse_form.asp?doc=customer.xsd
+    status: 200
+  - url: https://www.naesb.org/termsofuse_form.asp?doc=espi_v4.xsd
+    status: 200
+  - url: https://www.naesb.org/termsofuse_form.asp?doc=customer_v4.xsd
+    status: 200
+  - url: https://www.naesb.org/termsofuse_send.asp?doc=espi.xsd
+    status: 200
+    contentType: text/xml
+    bytes: 240412
+    note: Saved verbatim as schemas/naesb-espi.xsd. Parses as XML Schema.
+  - url: https://www.naesb.org/termsofuse_send.asp?doc=customer.xsd
+    status: 200
+    contentType: text/xml
+    bytes: 128083
+    note: Saved verbatim as schemas/naesb-customer.xsd. Parses as XML Schema.
+  - url: https://www.naesb.org/termsofuse_send.asp?doc=espi_v4.xsd
+    status: 200
+    contentType: text/xml
+    bytes: 235243
+    note: Saved verbatim as schemas/naesb-espi_v4.xsd. Parses as XML Schema.
+  - url: https://www.naesb.org/termsofuse_send.asp?doc=customer_v4.xsd
+    status: 200
+    contentType: text/xml
+    bytes: 130380
+    note: Saved verbatim as schemas/naesb-customer_v4.xsd. Parses as XML Schema.
+  - url: https://www.naesb.org/pdf4/eir_webregistry_technical_guide_v6.1_1018.pdf
+    status: 200
+    bytes: 1346002
+    note: 121-page OATI webRegistry Technical Guide v6.1 (Project #2601), dated 10/23/2018. Source of the base URL and the security section. Marked "proprietary and confidential information of OATI, Inc. Do not copy or distribute" — NOT stored in this repo, linked only.
+  - url: https://www.naesb.org/pdf4/naesb_eir_subscription_fee010715.docx
+    status: 200
+    note: Source of the $300 initial / $200 renewal registry subscription fees.
+  - url: https://www.naesb.org/pdf2/cert_products.pdf
+    status: 200
+    note: NAESB Certification Program certified-products directory, updated January 2026.
+  - url: https://www.naesb.org/pdf4/ac_authorities_2023.pdf
+    status: 200
+    note: Independent Authorized Certification Authorities directory — four ACAs.
+  - url: https://www.naesb.org//misc/naesb_matl_order_espi_standards.pdf
+    status: 200
+    note: NAESB Materials Order Form. Confirms "Free" for members, $250 e-mail-only per standard, $2,000 mail-only per version.
+  - url: https://www.naesb.org//misc/NAESB_Nonmember_Evaluation.pdf
+    status: 200
+    note: Non-member evaluation waiver procedure — three business days, view-only, LockLizard DRM.
+  - url: https://www.naesb.org/pdf4/memstats.pdf
+    status: 200
+    note: 'Membership list as of July 23, 2026. WGQ 112 members, WEQ 126, RMQ 32.'
+  - url: https://www.naesbwry.oati.com/cgi-bin/webplus.dll?Script=/naesbwry/WREG-Web-Services-Main.wml
+    status: 000
+    note: >-
+      Anonymous request FAILED at the TLS layer, curl exit 60 — "TLSv1.2 (OUT), TLS alert,
+      unknown CA (560) / SSL certificate problem: unable to get local issuer certificate". The
+      server certificate does not chain to a public root store. The documented WSDL GET could
+      therefore not be performed and no WSDL was harvested. Host resolves (174.141.249.134,
+      216.234.87.134); the endpoint exists, it is simply unreachable without the registry PKI.
+  - url: https://naesbwry.oati.com/
+    status: 000
+    note: Same TLS chain failure. This host is linked directly from the NAESB homepage.
+  - url: https://www.naesb.org/developers
+    status: 404
+  - url: https://www.naesb.org/developer
+    status: 404
+  - url: https://www.naesb.org/api
+    status: 404
+  - url: https://www.naesb.org/apis
+    status: 404
+  - url: https://www.naesb.org/docs
+    status: 404
+  - url: https://www.naesb.org/data
+    status: 404
+  - url: https://www.naesb.org/openapi.json
+    status: 404
+  - url: https://www.naesb.org/swagger.json
+    status: 404
+  - url: https://www.naesb.org/api-docs
+    status: 404
+  - url: https://www.naesb.org/.well-known/openid-configuration
+    status: 404
+  - url: https://www.naesb.org/.well-known/security.txt
+    status: 404
+  - url: https://www.naesb.org/robots.txt
+    status: 404
+  - url: https://www.naesb.org/sitemap.xml
+    status: 404
+  subdomainsProbed:
+    note: All returned curl exit code 6 / 0 status — no DNS record, host does not exist.
+    hosts:
+    - developer.naesb.org
+    - developers.naesb.org
+    - docs.naesb.org
+    - api.naesb.org
+    - apis.naesb.org
+    - data.naesb.org
+    - portal.naesb.org
+
+standardsBodyProfile:
+  founded: 1994
+  legalForm: Non-profit standards development organization
+  headquarters: 1415 Louisiana, Suite 3460, Houston, Texas 77002
+  charterVerbatim: >-
+    "The North American Energy Standards Board (NAESB) serves as an industry forum for the
+    development and promotion of standards which will lead to a seamless marketplace for
+    wholesale and retail natural gas and electricity."
+  quadrants:
+  - WEQ — Wholesale Electric Quadrant
+  - REQ / RMQ — Retail Electric (Retail Markets) Quadrant
+  - WGQ — Wholesale Gas Quadrant
+  - RGQ — Retail Gas Quadrant
+  membershipCounts:
+    asOf: '2026-07-23'
+    source: https://www.naesb.org/pdf4/memstats.pdf
+    WGQ: 112
+    WEQ: 126
+    RMQ: 32
+  fundingModel: >-
+    Stated by NAESB itself: "the organization is funded by its voluntary members and through
+    the sale of its copyright protected standards and work products, including the ESPI Model
+    Business Practices." This is why the standards are paywalled — the paywall IS the funding
+    model, and it is the direct reason a public-interest standard like Green Button is not
+    freely readable.
+  certificationProgrammes:
+  - name: Certification Program for Standards
+    scope: Software products certified compliant with WEQ OASIS S&CP (versions 1.0–2.2) and WGQ (versions 1.4–4.0)
+    publicDirectory: https://www.naesb.org/pdf2/cert_products.pdf
+    validity: Two years
+    currentlyCertified:
+    - 'WEQ OASIS S&CP: none'
+    - 'WGQ Version 4.0: Emerson O2CManager Software for Gas Pipelines v8.0 (2025-01-30 → 2027-01-30)'
+    - 'WGQ Version 4.0: Quorum Software myQuorum Pipeline (CAW) and IPWS (2025-10-09 → 2027-10-09)'
+    - 'WGQ Version 4.0: Enercross LLC NatGasHub.com (2025-10-06 → 2027-10-06)'
+  - name: Certification Program for Accredited Certification Authorities
+    publicDirectory: https://www.naesb.org/pdf4/ac_authorities_2023.pdf
+    currentlyAccredited:
+    - Open Access Technology International, Inc. (OATI)
+    - Systrends (processing certificates in partnership with GMO GlobalSign Inc.)
+    - GMO GlobalSign Inc.
+    - SSL Corp. d/b/a SSL.com
+  - name: Certification Program for Energy Efficiency Measurement and Verification Services or Products
+    publicDirectory: none found
+  - name: Certification Program for Third Party Data Privacy Practices
+    publicDirectory: none found
+    note: Directly relevant to Green Button third parties; no public list of certified entities was found.
+  - name: FERC eForms Vendors Certification (pending)
+    publicDirectory: https://www.naesb.org/pdf4/potential_ferc_fsv_2020.pdf
+    note: Programme under development; the PDF is an informal list of potential vendors, not certifications.
+  howMuchIsPublic: >-
+    Materially little, and the boundary is sharp. Public and anonymous: the ESPI XML schemas
+    (Apache 2.0), the certified-products directory, the ACA directory, the membership
+    statistics, meeting calendars, press releases and white paper listings. Not public: every
+    business practice standard in all four quadrants, the ESPI Model Business Practices
+    narrative, and the EIR registry and its API. NAESB is unusual among standards bodies in
+    having deliberately carved out the machine-readable part of one standard and released it
+    openly while keeping everything else paid — a targeted concession made specifically to
+    keep Green Button tooling viable, in exchange for the Green Button Alliance ensuring its
+    certification participants hold valid NAESB access.
+
+relatedOrganizations:
+  - name: Green Button Alliance (GBA)
+    relationship: >-
+      Separate non-profit, formed 2015. Endorses and supports REQ.21 ESPI and runs the Green
+      Button certification/testing programme. NAESB and GBA have a stated collaborative working
+      relationship. NAESB's Apache 2.0 schema exception was granted "Through an arrangement with
+      the GBA". GBA — not NAESB — certifies Green Button implementations.
+  - name: Open Access Technology International, Inc. (OATI)
+    relationship: >-
+      NAESB's chosen system administrator for the Electric Industry Registry since 2012, when
+      the NAESB EIR replaced the NERC TSIN. Operates the registry as OATI webRegistry, authors
+      the technical guide, and is also an NAESB-Authorized Certification Authority.
+  - name: US Department of Energy / NIST / White House OSTP
+    relationship: >-
+      Supported the 2011 development of the ESPI Model Business Practices; OSTP launched the
+      Green Button Initiative the same year. Support and initiative, not statutory mandate.
+
+notFound:
+  - No OpenAPI, Swagger, RAML, or Postman collection anywhere on naesb.org.
+  - No WSDL retrievable — the documented WSDL GET requires the registry PKI to complete TLS.
+  - No REST API of any kind operated by NAESB.
+  - No open data portal, no CSV/JSON bulk downloads, no data licence page.
+  - No developer, docs, api or data subdomain (all NXDOMAIN).
+  - No confirmed NAESB LinkedIn company page (both /naesb and /north-american-energy-standards-board returned 404).
+  - >-
+    A GitHub account at github.com/NAESB exists but is a personal USER account (type User,
+    created 2025-04-28, one public repo, no name, bio, company, blog or verified affiliation).
+    It is NOT recorded as NAESB's GitHub presence because the affiliation cannot be verified.
+
+actions:
+  schemasHarvested: 4
+  schemasDirectory: schemas/
+  openapiHarvested: false
+  openapiDirectory: null
+  apisYmlCreated: true
+  readmeCreated: true
+  reason: >-
+    Four real, verbatim, Apache-2.0-licensed XML Schema documents were harvested and all four
+    parse. No OpenAPI-family artifact exists to harvest, so no openapi/ directory was created
+    rather than fabricate one. Two entries were recorded in apis[]: the ESPI standard (schemas
+    attached, no baseURL because NAESB operates no endpoint) and the EIR webRegistry SOAP
+    service (documented baseURL, but unreachable anonymously).
