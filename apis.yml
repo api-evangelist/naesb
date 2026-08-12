@@ -167,6 +167,8 @@ apis:
     name: Download a NAESB EIR registry publication
     url: skills/naesb-download-eir-registry.md
 common:
+- type: MCPServer
+  url: mcp/naesb-mcp.yml
 - type: DomainSecurity
   url: security/naesb-domain-security.yml
 - type: Website
