@@ -171,3 +171,8 @@ candidate_tools:
     including CertificateURL and CertificateType (ROOT, INTERMEDIATE, ISSUER).
   source_operation: wsdl/naesb-eir-webregistry.wsdl#DownloadACA
   input_schema_source: EffectiveDate (optional), Version (optional)
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census
