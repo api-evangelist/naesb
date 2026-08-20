@@ -92,6 +92,13 @@ apis:
   - ESPI
   - Energy Usage
   - Smart Metering
+  - Authentication
+  - Retail Electric
+  tags_raw:
+  - Green Button
+  - ESPI
+  - Energy Usage
+  - Smart Metering
   - OAuth
   - Retail Electric
   properties:
