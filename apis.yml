@@ -27,6 +27,17 @@ description: >-
   and its endpoint could not even complete a TLS handshake anonymously. Open standard
   schemas, closed standards text, closed registry API, no consumer data and no open market
   data of its own.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: application-approval
